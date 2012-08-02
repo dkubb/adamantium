@@ -22,7 +22,7 @@ gem 'immutable', :git => 'https://github.com/mbj/immutable'
 Examples
 --------
 
-```
+``` ruby
 require 'immutable'
 require 'securerandom'
 
@@ -37,11 +37,11 @@ class Foo
 end
 
 object = Foo.new
-object.secure_random # => "abcdef"
+object.bar # => "abcdef"
 # Value is memoized
-object.secure_random # => "abcdef"
+object.bar # => "abcdef"
 # Returns the same object on all calls
-object.secure_random.equal?(object.secure_random) # => true
+object.bar.equal?(object.bar) # => true
 # Object is frozen
 object.frozen ? # => true
 ```
