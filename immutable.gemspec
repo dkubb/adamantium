@@ -4,7 +4,7 @@ require File.expand_path('../lib/immutable/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name        = 'immutable'
-  gem.version     = Virtus::VERSION
+  gem.version     = Immutable::VERSION.dup
   gem.authors     = [ 'Dan Kubb', 'Markus Schirp' ]
   gem.email       = [ 'dan.kubb@gmail.com', 'mbj@seonic.net' ]
   gem.description = 'Immutable extensions to objects'
