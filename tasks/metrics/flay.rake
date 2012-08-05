@@ -1,5 +1,5 @@
 begin
-  if RUBY_VERSION == '1.8.7' 
+  if RUBY_VERSION == '1.8.7'
     require 'flay'
     require 'yaml'
 
