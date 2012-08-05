@@ -27,7 +27,7 @@ require 'immutable'
 require 'securerandom'
 
 class Foo
-  incldue Immutable
+  include Immutable
 
   def bar
     SecureRandom.hex(6)
