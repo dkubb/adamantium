@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email       = [ 'dan.kubb@gmail.com', 'mbj@seonic.net' ]
   gem.description = 'Immutable extensions to objects'
   gem.summary     = gem.description
-  gem.homepage    = 'https://github.com/mbj/immutable'
+  gem.homepage    = 'https://github.com/dkubb/immutable'
 
   gem.require_paths    = [ 'lib' ]
   gem.files            = `git ls-files`.split("\n")

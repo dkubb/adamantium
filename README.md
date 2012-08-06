@@ -1,9 +1,9 @@
 immutable
 =========
 
-[![Build Status](https://secure.travis-ci.org/mbj/immutable.png?branch=master)](http://travis-ci.org/mbj/veritas-elastisearch-adapter)
-[![Dependency Status](https://gemnasium.com/mbj/immutable.png)](https://gemnasium.com/mbj/immutable)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mbj/immutable)
+[![Build Status](https://secure.travis-ci.org/dkubb/immutable.png?branch=master)](http://travis-ci.org/dkubb/veritas-elastisearch-adapter)
+[![Dependency Status](https://gemnasium.com/dkubb/immutable.png)](https://gemnasium.com/dkubb/immutable)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/dkubb/immutable)
 
 This is a small standalone gem featuring a module ripped out from [veritas](https://github.com/dkubb/veritas).
 It allows to make objects immutable in an unobtrusive way.
@@ -16,7 +16,7 @@ There is no gem release yet so use git source.
 In your **Gemfile**
 
 ``` ruby
-gem 'immutable', :git => 'https://github.com/mbj/immutable'
+gem 'immutable', :git => 'https://github.com/dkubb/immutable'
 ```
 
 Examples
