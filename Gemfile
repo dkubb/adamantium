@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'backports', '~> 2.6.1'
+gem 'ice_nine',  '~> 0.4.0'
 
 group :development do
   gem 'jeweler', '~> 1.8.3'

@@ -1,3 +1,5 @@
+require 'ice_nine'
+
 # Allows objects to be made immutable
 module Immutable
 
@@ -53,7 +55,7 @@ module Immutable
   #
   # @api private
   def self.freeze_value(value)
-    value.frozen? ? value : value.dup.freeze
+    value.frozen? ? value : IceNine.deep_freeze(value.dup)
   end
 
   private_class_method :freeze_value
@@ -240,7 +242,7 @@ private
     #
     # @api public
     def new(*)
-      super.freeze
+      IceNine.deep_freeze(super)
     end
 
   end # module ClassMethods
