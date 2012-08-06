@@ -1,7 +1,7 @@
 immutable
 =========
 
-[![Build Status](https://secure.travis-ci.org/dkubb/immutable.png?branch=master)](http://travis-ci.org/dkubb/veritas-elastisearch-adapter)
+[![Build Status](https://secure.travis-ci.org/dkubb/immutable.png)](http://travis-ci.org/dkubb/immutable)
 [![Dependency Status](https://gemnasium.com/dkubb/immutable.png)](https://gemnasium.com/dkubb/immutable)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/dkubb/immutable)
 
