@@ -50,6 +50,7 @@ Credits
 -------
 
 * Dan Kubb ([dkubb](https://github.com/dkubb))
+* Markus Schirp ([mbj](https://github.com/mbj))
 
 Contributing
 -------------
