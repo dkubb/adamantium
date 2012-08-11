@@ -16,7 +16,7 @@ There is no gem release yet so use git source.
 In your **Gemfile**
 
 ``` ruby
-gem 'immutable', :github => 'dkubb/immutable'
+gem 'immutable', :git => 'https://github.com/dkubb/immutable.git'
 ```
 
 Examples
