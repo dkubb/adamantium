@@ -43,7 +43,7 @@ object.bar # => "abcdef"
 # Returns the same object on all calls
 object.bar.equal?(object.bar) # => true
 # Object is frozen
-object.frozen ? # => true
+object.frozen? # => true
 ```
 
 Credits
