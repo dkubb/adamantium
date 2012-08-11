@@ -37,13 +37,13 @@ class Foo
 end
 
 object = Foo.new
-object.bar # => "abcdef"
+object.bar  # => "abcdef"
 # Value is memoized
-object.bar # => "abcdef"
+object.bar  # => "abcdef"
 # Returns the same object on all calls
-object.bar.equal?(object.bar) # => true
+object.bar.equal?(object.bar)  # => true
 # Object is frozen
-object.frozen? # => true
+object.frozen?  # => true
 ```
 
 Credits
