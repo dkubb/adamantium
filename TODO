@@ -1,3 +1,2 @@
-* Freeze object using [ice_nine](https://github.com/dkubb/ice_nine) or add Immutable like module in ice_nine.
 * Make a gem release after review from original author (dkubb).
 * Decide about gem name (if this will not be released within ice_nine). "immutable" is already taken.
