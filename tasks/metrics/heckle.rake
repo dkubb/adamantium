@@ -34,9 +34,9 @@ begin
       raise "ruby2ruby version #{Ruby2Ruby::VERSION} may not work properly, 1.2.2 *only* is recommended for use with heckle"
     end
 
-    require 'immutable'
+    require 'adamantium'
 
-    root_module_regexp = Regexp.union('Immutable')
+    root_module_regexp = Regexp.union('Adamantium')
 
     spec_dir = Pathname('spec/unit')
 

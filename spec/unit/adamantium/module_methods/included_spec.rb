@@ -3,13 +3,13 @@
 require 'spec_helper'
 require File.expand_path('../../fixtures/classes', __FILE__)
 
-describe Immutable::ModuleMethods, '#included' do
+describe Adamantium::ModuleMethods, '#included' do
   subject { object.included(object) }
 
-  let(:object) { ImmutableSpecs::Object }
+  let(:object) { AdamantiumSpecs::Object }
 
   before do
-    Immutable.should_receive(:included).with(object).and_return(Immutable)
+    Adamantium.should_receive(:included).with(object).and_return(Adamantium)
   end
 
   it_should_behave_like 'a command method'

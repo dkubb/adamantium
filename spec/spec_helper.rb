@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'immutable'
+require 'adamantium'
 require 'spec'
 require 'spec/autorun'
 

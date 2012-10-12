@@ -18,7 +18,7 @@ shared_examples_for 'memoizes method' do
   specification = proc do
     subject
     file, line = object.new.send(method).first.split(':')[0, 2]
-    File.expand_path(file).should eql(File.expand_path('../../../../../lib/immutable.rb', __FILE__))
+    File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium.rb', __FILE__))
     line.to_i.should eql(211)
   end
 
@@ -48,10 +48,10 @@ shared_examples_for 'memoizes method' do
   end
 end
 
-describe Immutable::ModuleMethods, '#memoize' do
+describe Adamantium::ModuleMethods, '#memoize' do
   subject { object.memoize(method) }
 
-  let(:object) { Class.new(ImmutableSpecs::Object) }
+  let(:object) { Class.new(AdamantiumSpecs::Object) }
 
   context 'public method' do
     let(:method) { :public_method }

@@ -1,7 +1,7 @@
 require 'ice_nine'
 
 # Allows objects to be made immutable
-module Immutable
+module Adamantium
 
   # Storage for memoized methods
   Memory = Class.new(::Hash)
@@ -9,7 +9,7 @@ module Immutable
   # Hook called when module is included
   #
   # @param [Module] descendant
-  #   the module or class including Immutable
+  #   the module or class including Adamantium
   #
   # @return [self]
   #
@@ -24,10 +24,10 @@ module Immutable
   # Attempt to freeze an object
   #
   # @example using a value object
-  #   Immutable.freeze_object(12345)  # => noop
+  #   Adamantium.freeze_object(12345)  # => noop
   #
   # @example using a normal object
-  #   Immutable.freeze_object({})  # => duplicate & freeze object
+  #   Adamantium.freeze_object({})  # => duplicate & freeze object
   #
   # @param [Object] object
   #   the object to freeze
@@ -142,10 +142,10 @@ private
   #
   # @api private
   def store_memory(name, value)
-    memory[name] = Immutable.freeze_object(value)
+    memory[name] = Adamantium.freeze_object(value)
   end
 
-  # Methods mixed in to immutable modules
+  # Methods mixed in to adamantium modules
   module ModuleMethods
 
     # Hook called when module is included
@@ -157,7 +157,7 @@ private
     #
     # @api private
     def included(mod)
-      Immutable.included(mod)
+      Adamantium.included(mod)
       self
     end
 
@@ -230,13 +230,13 @@ private
 
   end # module ModuleMethods
 
-  # Methods mixed in to immutable classes
+  # Methods mixed in to adamantium classes
   module ClassMethods
 
     # Instantiate a new frozen object
     #
     # @example
-    #   object = ImmutableClass.new  # object is frozen
+    #   object = AdamantiumClass.new  # object is frozen
     #
     # @return [Object]
     #
@@ -246,4 +246,4 @@ private
     end
 
   end # module ClassMethods
-end # module Immutable
+end # module Adamantium

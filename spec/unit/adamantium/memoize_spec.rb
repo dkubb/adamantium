@@ -3,10 +3,10 @@
 require 'spec_helper'
 require File.expand_path('../fixtures/classes', __FILE__)
 
-describe Immutable, '#memoize' do
+describe Adamantium, '#memoize' do
   subject { object.memoize(method, value) }
 
-  let(:described_class) { Class.new(ImmutableSpecs::Object) }
+  let(:described_class) { Class.new(AdamantiumSpecs::Object) }
   let(:object)          { described_class.new               }
   let(:method)          { :test                             }
 

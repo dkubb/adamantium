@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Immutable, '.freeze_object' do
+describe Adamantium, '.freeze_object' do
   subject { object.freeze_object(value) }
 
   let(:object) { self.class.described_type }

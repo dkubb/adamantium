@@ -3,10 +3,10 @@
 require 'spec_helper'
 require File.expand_path('../../fixtures/classes', __FILE__)
 
-describe Immutable::ClassMethods, '#new' do
+describe Adamantium::ClassMethods, '#new' do
   subject { object.new }
 
-  let(:object) { ImmutableSpecs::Object }
+  let(:object) { AdamantiumSpecs::Object }
 
   it { should be_instance_of(object) }
 

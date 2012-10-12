@@ -1,8 +1,8 @@
 # encoding: utf-8
 
-module ImmutableSpecs
+module AdamantiumSpecs
   class Object
-    include Immutable
+    include Adamantium
 
     def test
       'test'
@@ -25,4 +25,4 @@ module ImmutableSpecs
     end
 
   end # class Object
-end # module ImmutableSpecs
+end # module AdamantiumSpecs

@@ -3,10 +3,10 @@
 require 'spec_helper'
 require File.expand_path('../fixtures/classes', __FILE__)
 
-describe Immutable, '#freeze' do
+describe Adamantium, '#freeze' do
   subject { object.freeze }
 
-  let(:described_class) { Class.new(ImmutableSpecs::Object) }
+  let(:described_class) { Class.new(AdamantiumSpecs::Object) }
 
   before do
     described_class.memoize(:test)
@@ -26,7 +26,7 @@ describe Immutable, '#freeze' do
     it 'sets a memoization instance variable' do
       object.should_not be_instance_variable_defined(:@__memory)
       subject
-      object.instance_variable_get(:@__memory).should be_instance_of(Immutable::Memory)
+      object.instance_variable_get(:@__memory).should be_instance_of(Adamantium::Memory)
     end
   end
 
@@ -44,7 +44,7 @@ describe Immutable, '#freeze' do
     end
 
     it 'does not set an instance variable for memoization' do
-      object.instance_variable_get(:@__memory).should be_instance_of(Immutable::Memory)
+      object.instance_variable_get(:@__memory).should be_instance_of(Adamantium::Memory)
       subject
     end
   end
