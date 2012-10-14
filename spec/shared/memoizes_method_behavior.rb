@@ -6,20 +6,20 @@ shared_examples_for 'memoizes method' do
     instance.send(method).should equal(instance.send(method))
   end
 
-# specification = proc do
-#   subject
-#   file, line = object.new.send(method).first.split(':')[0, 2]
-#   File.expand_path(file).should eql(File.expand_path('../../../lib/adamantium.rb', __FILE__))
-#   [237, 272].should include(line.to_i)
-# end
+  specification = proc do
+    subject
+    file, line = object.new.send(method).first.split(':')[0, 2]
+    File.expand_path(file).should eql(File.expand_path('../../../lib/adamantium.rb', __FILE__))
+    line.to_i.should be(249)
+  end
 
-# it 'sets the file and line number properly' do
-#   if RUBY_PLATFORM.include?('java')
-#     pending('Kernel#caller returns the incorrect line number in JRuby', &specification)
-#   else
-#     instance_eval(&specification)
-#   end
-# end
+  it 'sets the file and line number properly' do
+    if RUBY_PLATFORM.include?('java')
+      pending('Kernel#caller returns the incorrect line number in JRuby', &specification)
+    else
+      instance_eval(&specification)
+    end
+  end
 
   context 'when the initializer calls the memoized method' do
     before do
