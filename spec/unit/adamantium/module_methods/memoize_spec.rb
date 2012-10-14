@@ -8,6 +8,16 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
   let(:object) { Class.new(AdamantiumSpecs::Object) }
 
+  context 'method with nonzero arity' do
+    let(:method) { :single_argument } 
+
+    it 'should raise error' do
+      expect { subject }.to(raise_error(Adamantium::ArityError) do |exception|
+        exception.message.should == '#single_argument has nonzero arity so cannot be memoized'
+      end)
+    end
+  end
+
   context 'public method' do
     let(:method) { :public_method }
 

@@ -9,7 +9,7 @@ describe Adamantium, 'usage' do
         output.rewind
         output.read
       end
-      idempotent :result
+      memoize :result
 
     private
 
@@ -27,5 +27,5 @@ describe Adamantium, 'usage' do
   subject { klass.new }
 
   its(:result) { should eql('Foo') }
-  its(:result) { should be_frozen  }
+  its(:result) { should_not be_frozen  }
 end

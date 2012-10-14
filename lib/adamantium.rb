@@ -17,7 +17,7 @@ module Adamantium
     #
     def initialize(scope, method_name)
       @scope, @method_name = scope, method_name
-      super("#{scope.name}##{method_name} has nonzero arity so cannot be idempotent/memoized")
+      super("#{scope.name}##{method_name} has nonzero arity so cannot be memoized")
     end
   end
 
@@ -205,27 +205,7 @@ private
     # @api public
     def memoize(*methods)
       methods.each do |method| 
-        define_memoized_method(method, :memoize_method) 
-      end
-
-      self
-    end
-
-    # Make a list of methods idempotent
-    #
-    # @example
-    #   idempotent :hash
-    #
-    # @param [Array<#to_s>] *methods
-    #   a list of methods to declare as idempotent
-    #
-    # @return [self]
-    #
-    # @api public
-    #
-    def idempotent(*methods)
-      methods.each do |method| 
-        define_memoized_method(method, :idempotent_method) 
+        define_memoized_method(method)
       end
 
       self
@@ -233,20 +213,7 @@ private
 
   private
 
-    # TODO: 
-    #
-    # Refactor idempotent and memoized method generation into definer 
-    # objects to remove duplication and complexity. 
-    #
-    # class Definer
-    #   class Memoization < self
-    #   end
-    #
-    #   class Idempotence < self
-    #   end
-    # end
-
-    # Declare idempotent method
+    # Define memoized method
     #
     # @param [#to_s] method
     #   a method to memoize
@@ -255,7 +222,7 @@ private
     #
     # @api private
     #
-    def define_memoized_method(name, operation)
+    def define_memoized_method(name)
       visibility = method_visibility(name)
       method = instance_method(name)
 
@@ -263,28 +230,9 @@ private
         raise ArityError.new(self, name)
       end
 
-      send(:"define_#{operation}", name, method)
-      send(visibility, name)
-    end
+      define_memoize_method(name, method)
 
-    # Define an idempotent method that delegates to the original method
-    #
-    # @param [Symbol] method
-    #   the name of the method
-    #
-    # @param [UnboundMethod] original
-    #   the original method
-    #
-    # @return [undefined]
-    #
-    # @api private
-    def define_idempotent_method(method, original)
-      define_method(method) do 
-        access(method) do 
-          result = original.bind(self).call
-          Adamantium.freeze_object(result)
-        end
-      end
+      send(visibility, name)
     end
 
     # Define a memoized method that delegates to the original method
