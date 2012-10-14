@@ -11,4 +11,8 @@ describe Adamantium::ClassMethods, '#new' do
   it { should be_instance_of(object) }
 
   it { should be_frozen }
+
+  it 'does not freeze the object graph' do
+    subject.random_attribute.should_not be_frozen
+  end
 end

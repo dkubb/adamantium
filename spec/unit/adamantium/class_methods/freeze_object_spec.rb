@@ -54,4 +54,21 @@ describe Adamantium, '.freeze_object' do
 
     it { should be_frozen }
   end
+
+  context 'with a composed value' do
+    let(:inner) { String.new }
+    let(:value) { [inner] }
+
+    it { should_not equal(value) }
+
+    it { should be_instance_of(Array) }
+
+    it { should == value }
+
+    it { should be_frozen }
+
+    it 'should NOT freeze inner value' do
+      inner.should_not be_frozen
+    end
+  end
 end
