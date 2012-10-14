@@ -22,7 +22,7 @@ describe Adamantium, '#memoize' do
       object.send(method).should be(value)
     end
 
-    it 'doesn ot freeze memoized value' do
+    it 'does not freeze memoized value' do
       subject
       object.send(method).should_not be_frozen
     end
