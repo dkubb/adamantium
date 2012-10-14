@@ -46,6 +46,12 @@ object.bar.equal?(object.bar)  # => true
 object.frozen?  # => true
 ```
 
+Hints
+-----
+
+* Do not memoize methods that take arguments they are per definition not idempotent
+* Memoized method results are not frozen.
+
 Credits
 -------
 
