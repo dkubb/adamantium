@@ -170,7 +170,6 @@ private
   # @return [Object]
   #
   # @api private
-  #
   def access(name)
     memory.fetch(name) do
       store_memory(name, yield)
@@ -237,12 +236,12 @@ private
     # TODO: 
     #
     # Refactor idempotent and memoized method generation into definer 
-    # objects to remove duplication and complexit. 
+    # objects to remove duplication and complexity. 
     #
     # class Definer
     #   class Memoization < self
     #   end
-
+    #
     #   class Idempotence < self
     #   end
     # end
@@ -268,7 +267,7 @@ private
       send(visibility, name)
     end
 
-    # Define a idempotent method that delegates to the original method
+    # Define an idempotent method that delegates to the original method
     #
     # @param [Symbol] method
     #   the name of the method
