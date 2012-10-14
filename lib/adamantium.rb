@@ -212,7 +212,7 @@ private
       self
     end
 
-    # Declare a list of methids as idempotent
+    # Make a list of methods idempotent
     #
     # @example
     #   idempotent :hash
