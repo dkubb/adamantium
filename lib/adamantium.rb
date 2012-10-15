@@ -220,7 +220,6 @@ private
     # @return [undefined]
     #
     # @api private
-    #
     def define_memoized_method(name)
       visibility = method_visibility(name)
       method = instance_method(name)
