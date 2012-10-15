@@ -242,7 +242,7 @@ private
     #
     # @api private
     def define_memoize_method(method, original)
-      define_method(method) do 
+      define_method(method) do || # explicit empty block with zero arity for rbx
         access(method) do
           original.bind(self).call
         end

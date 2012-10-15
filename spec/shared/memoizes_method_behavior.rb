@@ -1,5 +1,10 @@
 shared_examples_for 'memoizes method' do
 
+  it 'creates method with zero arity' do
+    subject
+    object.instance_method(method).arity.should be(0)
+  end
+
   it 'memoizes the instance method' do
     subject
     instance = object.new
@@ -10,7 +15,7 @@ shared_examples_for 'memoizes method' do
     subject
     file, line = object.new.send(method).first.split(':')[0, 2]
     File.expand_path(file).should eql(File.expand_path('../../../lib/adamantium.rb', __FILE__))
-    line.to_i.should be(249)
+    line.to_i.should be(247)
   end
 
   it 'sets the file and line number properly' do
