@@ -16,7 +16,6 @@ module Adamantium
     # @api private
     #
     def initialize(scope, method_name)
-      @scope, @method_name = scope, method_name
       super("#{scope.name}##{method_name} has nonzero arity so cannot be memoized")
     end
   end
