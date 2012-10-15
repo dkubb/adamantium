@@ -8,7 +8,7 @@ module Adamantium
 
     # Initialize object
     #
-    # @param [Class|Model] scope
+    # @param [Class,Model] scope
     # @param [Symbol] method_name
     #
     # @return [undefined]
