@@ -1,27 +1,20 @@
+# encoding: utf-8
+
 begin
+  require 'spec/rake/spectask'
 
-  begin
-    require 'rspec/core/rake_task'
-  rescue LoadError
-    require 'spec/rake/spectask'
-
-    module RSpec
-      module Core
-        RakeTask = Spec::Rake::SpecTask
-      end
-    end
-  end
-
-  desc 'run all specs'
+  desc 'Run all specs'
   task :spec => %w[ spec:unit spec:integration ]
 
   namespace :spec do
-    RSpec::Core::RakeTask.new(:integration) do |t|
-      t.pattern = 'spec/integration/**/*_spec.rb'
+    Spec::Rake::SpecTask.new(:integration) do |t|
+      t.ruby_opts = %w[ -r./spec/support/config_alias ]
+      t.pattern   = 'spec/integration/**/*_spec.rb'
     end
 
-    RSpec::Core::RakeTask.new(:unit) do |t|
-      t.pattern = 'spec/unit/**/*_spec.rb'
+    Spec::Rake::SpecTask.new(:unit) do |t|
+      t.ruby_opts = %w[ -r./spec/support/config_alias ]
+      t.pattern   = 'spec/unit/**/*_spec.rb'
     end
   end
 rescue LoadError
@@ -31,14 +24,24 @@ rescue LoadError
 end
 
 begin
-  desc "Generate code coverage"
-  RSpec::Core::RakeTask.new(:rcov) do |t|
-    t.rcov      = true
-    t.rcov_opts = File.read('spec/rcov.opts').split(/\s+/)
+  if RUBY_VERSION < '1.9'
+    desc 'Generate code coverage'
+    Spec::Rake::SpecTask.new(:coverage) do |t|
+      t.rcov      = true
+      t.pattern   = 'spec/unit/**/*_spec.rb'
+      t.rcov_opts = File.read('spec/rcov.opts').split(/\s+/)
+    end
+  else
+    desc 'Generate code coverage'
+    task :coverage do
+      ENV['COVERAGE'] = 'true'
+      Rake::Task['spec:unit'].execute
+    end
   end
 rescue LoadError
-  task :rcov do
-    abort 'rcov is not available. In order to run rcov, you must: gem install rcov'
+  task :coverage do
+    lib = RUBY_VERSION < '1.9' ? 'rcov' : 'simplecov'
+    abort "coverage is not available. In order to run #{lib}, you must: gem install #{lib}"
   end
 end
 
