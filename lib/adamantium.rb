@@ -1,7 +1,24 @@
-require 'ice_nine'
-
 # Allows objects to be made immutable
 module Adamantium
+
+  # Error raised when memoized or idempotent method with non zero arity is created
+  class ArityError < RuntimeError
+
+  private
+
+    # Initialize object
+    #
+    # @param [Class,Model] scope
+    # @param [Symbol] method_name
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def initialize(scope, method_name)
+      super("#{scope.name}##{method_name} has nonzero arity so cannot be memoized")
+    end
+  end
 
   # Storage for memoized methods
   Memory = Class.new(::Hash)
@@ -16,8 +33,8 @@ module Adamantium
   # @api private
   def self.included(descendant)
     super
-    descendant.extend ModuleMethods if descendant.kind_of?(Module)
-    descendant.extend ClassMethods  if descendant.kind_of?(Class)
+    descendant.extend(ModuleMethods) if descendant.kind_of?(Module)
+    descendant.extend(ClassMethods)  if descendant.kind_of?(Class)
     self
   end
 
@@ -55,7 +72,7 @@ module Adamantium
   #
   # @api private
   def self.freeze_value(value)
-    value.frozen? ? value : IceNine.deep_freeze(value.dup)
+    value.frozen? ? value : value.dup.freeze
   end
 
   private_class_method :freeze_value
@@ -142,7 +159,20 @@ private
   #
   # @api private
   def store_memory(name, value)
-    memory[name] = Adamantium.freeze_object(value)
+    memory[name] = value
+  end
+
+  # Access stored value or create new
+  #
+  # @param [Symbol] name
+  #
+  # @return [Object]
+  #
+  # @api private
+  def access(name)
+    memory.fetch(name) do
+      store_memory(name, yield)
+    end
   end
 
   # Methods mixed in to adamantium modules
@@ -164,7 +194,7 @@ private
     # Memoize a list of methods
     #
     # @example
-    #   memoize :hash
+    #   memoize :buffer
     #
     # @param [Array<#to_s>] *methods
     #   a list of methods to memoize
@@ -173,13 +203,16 @@ private
     #
     # @api public
     def memoize(*methods)
-      methods.each { |method| memoize_method(method) }
+      methods.each do |method| 
+        define_memoized_method(method)
+      end
+
       self
     end
 
   private
 
-    # Memoize the named method
+    # Define memoized method
     #
     # @param [#to_s] method
     #   a method to memoize
@@ -187,10 +220,17 @@ private
     # @return [undefined]
     #
     # @api private
-    def memoize_method(method)
-      visibility = method_visibility(method)
-      define_memoize_method(method)
-      send(visibility, method)
+    def define_memoized_method(name)
+      visibility = method_visibility(name)
+      method = instance_method(name)
+
+      unless method.arity.zero?
+        raise ArityError.new(self, name)
+      end
+
+      define_memoize_method(name, method)
+
+      send(visibility, name)
     end
 
     # Define a memoized method that delegates to the original method
@@ -201,14 +241,10 @@ private
     # @return [undefined]
     #
     # @api private
-    def define_memoize_method(method)
-      original = instance_method(method)
-      undef_method(method)
-      define_method(method) do |*args|
-        if memory.key?(method)
-          memoized(method)
-        else
-          store_memory(method, original.bind(self).call(*args))
+    def define_memoize_method(method, original)
+      define_method(method) do || # explicit empty block with zero arity for rbx
+        access(method) do
+          original.bind(self).call
         end
       end
     end
@@ -242,7 +278,7 @@ private
     #
     # @api public
     def new(*)
-      IceNine.deep_freeze(super)
+      super.freeze
     end
 
   end # module ClassMethods

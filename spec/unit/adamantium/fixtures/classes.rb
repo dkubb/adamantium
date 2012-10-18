@@ -4,6 +4,15 @@ module AdamantiumSpecs
   class Object
     include Adamantium
 
+    attr_reader :random_attribute
+
+    def initialize
+      @random_attribute = ::Object.new
+    end
+
+    def single_argument(foo)
+    end
+
     def test
       'test'
     end

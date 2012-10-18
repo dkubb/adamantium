@@ -46,6 +46,12 @@ object.bar.equal?(object.bar)  # => true
 object.frozen?  # => true
 ```
 
+Hints
+-----
+
+* Do not memoize methods that take arguments they are per definition not idempotent
+* Memoized method results are not frozen.
+
 Credits
 -------
 
@@ -68,7 +74,6 @@ License
 -------
 
 Copyright (c) 2009-2012 Dan Kubb
-Copyright (c) 2012 Markus Schirp (packaging)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
