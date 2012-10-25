@@ -166,7 +166,7 @@ private
     # @example
     #   memoize :hash
     #
-    # @param [Array<#to_s>] *methods
+    # @param [Array<#to_s>] methods
     #   a list of methods to memoize
     #
     # @return [self]
