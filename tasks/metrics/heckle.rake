@@ -92,6 +92,8 @@ begin
           spec_class_methods << method
         end
 
+        spec_class_methods -= other_class_methods
+
         # get the instances methods
         spec_methods = mod.public_instance_methods(false)
 
