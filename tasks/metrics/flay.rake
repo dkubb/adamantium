@@ -1,13 +1,13 @@
 begin
-  if RUBY_VERSION == '1.8.7'
-    require 'flay'
-    require 'yaml'
+  require 'flay'
+  require 'yaml'
 
-    config      = YAML.load_file(File.expand_path('../../../config/flay.yml', __FILE__)).freeze
-    threshold   = config.fetch('threshold').to_i
-    total_score = config.fetch('total_score').to_f
-    files       = Flay.expand_dirs_to_files(config.fetch('path', 'lib'))
+  config      = YAML.load_file(File.expand_path('../../../config/flay.yml', __FILE__)).freeze
+  threshold   = config.fetch('threshold').to_i
+  total_score = config.fetch('total_score').to_f
+  files       = Flay.expand_dirs_to_files(config.fetch('path', 'lib')).sort
 
+  namespace :metrics do
     # original code by Marty Andrews:
     # http://blog.martyandrews.net/2009/05/enforcing-ruby-code-quality.html
     desc 'Analyze for code duplication'
@@ -16,7 +16,7 @@ begin
       flay = Flay.new(:fuzzy => false, :verbose => false, :mass => 0)
       flay.process(*files)
 
-      max = flay.masses.map { |hash, mass| mass.to_f / flay.hashes[hash].size }.max
+      max = (flay.masses.map { |hash, mass| mass.to_f / flay.hashes[hash].size }.max) || 0
       unless max >= threshold
         raise "Adjust flay threshold down to #{max}"
       end
@@ -35,13 +35,9 @@ begin
         raise "#{flay.masses.size} chunks of code have a duplicate mass > #{threshold}"
       end
     end
-  else
-    task :flay do
-      $stderr.puts 'Flay has inconsistend results accros ruby implementations. It is only enabled on 1.8.7, fix and remove guard'
-    end
   end
 rescue LoadError
   task :flay do
-    abort 'Flay is not available. In order to run flay, you must: gem install flay'
+    $stderr.puts 'Flay is not available. In order to run flay, you must: gem install flay'
   end
 end

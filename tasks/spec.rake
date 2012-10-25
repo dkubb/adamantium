@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+spec_defaults = lambda do |spec|
+  spec.spec_opts << '--options' << 'spec/spec.opts'
+end
+
 begin
   require 'spec/rake/spectask'
 
@@ -7,42 +11,41 @@ begin
   task :spec => %w[ spec:unit spec:integration ]
 
   namespace :spec do
-    Spec::Rake::SpecTask.new(:integration) do |t|
-      t.ruby_opts = %w[ -r./spec/support/config_alias ]
-      t.pattern   = 'spec/integration/**/*_spec.rb'
+    desc 'Run unit specs'
+    Spec::Rake::SpecTask.new(:unit) do |unit|
+      spec_defaults.call(unit)
+      unit.pattern = 'spec/unit/**/*_spec.rb'
     end
 
-    Spec::Rake::SpecTask.new(:unit) do |t|
-      t.ruby_opts = %w[ -r./spec/support/config_alias ]
-      t.pattern   = 'spec/unit/**/*_spec.rb'
+    desc 'Run integration specs'
+    Spec::Rake::SpecTask.new(:integration) do |integration|
+      spec_defaults.call(integration)
+      integration.pattern = 'spec/integration/**/*_spec.rb'
     end
   end
 rescue LoadError
-  task :spec do
-    abort 'rspec is not available. In order to run spec, you must: gem install rspec'
+  %w[ spec spec:unit spec:integration ].each do |name|
+    task name do
+      $stderr.puts "rspec is not available. In order to run #{name}, you must: gem install rspec"
+    end
   end
 end
 
 begin
-  if RUBY_VERSION < '1.9'
-    desc 'Generate code coverage'
-    Spec::Rake::SpecTask.new(:coverage) do |t|
-      t.rcov      = true
-      t.pattern   = 'spec/unit/**/*_spec.rb'
-      t.rcov_opts = File.read('spec/rcov.opts').split(/\s+/)
-    end
-  else
-    desc 'Generate code coverage'
-    task :coverage do
-      ENV['COVERAGE'] = 'true'
-      Rake::Task['spec:unit'].execute
+  require 'rcov'
+
+  namespace :metrics do
+    Spec::Rake::SpecTask.new(:rcov) do |rcov|
+      spec_defaults.call(rcov)
+      rcov.rcov      = true
+      rcov.pattern   = 'spec/unit/**/*_spec.rb'
+      rcov.rcov_opts = File.read('spec/rcov.opts').split(/\s+/)
     end
   end
 rescue LoadError
-  task :coverage do
-    lib = RUBY_VERSION < '1.9' ? 'rcov' : 'simplecov'
-    abort "coverage is not available. In order to run #{lib}, you must: gem install #{lib}"
+  task :rcov do
+    $stderr.puts 'rcov is not available. In order to run rcov, you must: gem install rcov'
   end
 end
 
-task :test => 'spec'
+task :test    => :spec
