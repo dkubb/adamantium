@@ -2,8 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'backports', '~> 2.6.4'
-gem 'ice_nine',  '~> 0.4.0'
+gemspec
 
 group :development do
   gem 'rake',  '~> 0.9.2'

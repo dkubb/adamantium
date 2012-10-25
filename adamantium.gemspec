@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
 
   gem.add_runtime_dependency('backports', '~> 2.6.4')
-  gem.add_runtime_dependency('ice_nine',  '~> 0.4.0')
+  gem.add_runtime_dependency('ice_nine',  '~> 0.5.0')
 
   gem.add_development_dependency('rake',  '~> 0.9.2')
   gem.add_development_dependency('rspec', '~> 1.3.2')
