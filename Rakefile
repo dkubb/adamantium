@@ -2,8 +2,7 @@
 
 require 'rake'
 
-require File.expand_path('../lib/adamantium/version', __FILE__)
-
 FileList['tasks/**/*.rake'].each { |task| import task }
 
+desc 'Default: run all specs'
 task :default => :spec
