@@ -4,12 +4,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-group :development do
-  gem 'rake',  '~> 0.9.2.2'
-  gem 'rspec', '~> 1.3.2'
-  gem 'yard',  '~> 0.8.3'
-end
-
 group :guard do
   gem 'guard',         '~> 1.1.1'
   gem 'guard-bundler', '~> 0.1.3'
