@@ -115,7 +115,6 @@ begin
 
           unless spec_file.file?
             raise "No spec file #{spec_file} for #{mod}.#{method}"
-            next
           end
 
           specs << [ ".#{method}", [ spec_file ] ]
@@ -130,7 +129,6 @@ begin
 
           unless spec_file.file?
             raise "No spec file #{spec_file} for #{mod}##{method}"
-            next
           end
 
           specs << [ "##{method}", [ spec_file ] ]
