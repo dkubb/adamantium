@@ -12,7 +12,7 @@ module Adamantium
     #
     # @api public
     def new(*)
-      IceNine.deep_freeze(super)
+      freezer.call(super)
     end
 
   end # module ClassMethods
