@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe Adamantium, '.freeze_object' do
-  subject { object.freeze_object(value) }
+describe Adamantium::Freezer::Deep, '.call' do
+  subject { object.call(value) }
 
   let(:object) { self.class.described_type }
 
@@ -53,5 +53,13 @@ describe Adamantium, '.freeze_object' do
     it { should == value }
 
     it { should be_frozen }
+  end
+
+  context 'with a composed value' do
+    let(:value) { [String.new] }
+
+    it 'does freeze inner values' do
+      subject.first.should be_frozen
+    end
   end
 end

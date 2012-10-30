@@ -6,6 +6,35 @@ module Adamantium
   # Storage for memoized methods
   Memory = Class.new(::Hash)
 
+  # Defaults to less strict defaults
+  module Flat
+
+    # Return flat freezer
+    #
+    # @return [Freezer::Flat]
+    #
+    # @api private
+    #
+    def freezer
+      Freezer::Flat
+    end
+
+    # Hook called when module is included
+    #
+    # @param [Class,Module] descendant
+    #
+    # @return [self]
+    #
+    # @api private
+    def self.included(descendant)
+      super
+      descendant.send(:include, Adamantium)
+      descendant.extend(self)
+
+      self
+    end
+  end
+
   # Hook called when module is included
   #
   # @param [Module] descendant
@@ -20,45 +49,6 @@ module Adamantium
     descendant.extend ClassMethods  if descendant.kind_of?(Class)
     self
   end
-
-  # Attempt to freeze an object
-  #
-  # @example using a value object
-  #   Adamantium.freeze_object(12345)  # => noop
-  #
-  # @example using a normal object
-  #   Adamantium.freeze_object({})  # => duplicate & freeze object
-  #
-  # @param [Object] object
-  #   the object to freeze
-  #
-  # @return [Object]
-  #   if supported, the frozen object, otherwise the object directly
-  #
-  # @api public
-  def self.freeze_object(object)
-    case object
-    when Numeric, TrueClass, FalseClass, NilClass, Symbol
-      object
-    else
-      freeze_value(object)
-    end
-  end
-
-  # Returns a frozen value
-  #
-  # @param [Object] value
-  #   a value to freeze
-  #
-  # @return [Object]
-  #   if frozen, the value directly, otherwise a frozen copy of the value
-  #
-  # @api private
-  def self.freeze_value(value)
-    value.frozen? ? value : IceNine.deep_freeze(value.dup)
-  end
-
-  private_class_method :freeze_value
 
   # Freeze the object
   #
@@ -102,7 +92,10 @@ module Adamantium
   #
   # @api public
   def memoize(name, value)
-    store_memory(name, value) unless memory.key?(name)
+    unless memory.key?(name)
+      store_memory(name, freezer.call(value)) 
+    end
+
     self
   end
 
@@ -129,6 +122,15 @@ private
     @__memory ||= Memory.new
   end
 
+  # Return class level freezer
+  #
+  # @return [#call]
+  #
+  # @api private
+  def freezer
+    self.class.freezer
+  end
+
   # Store the value in memory
   #
   # @param [Symbol] name
@@ -142,9 +144,26 @@ private
   #
   # @api private
   def store_memory(name, value)
-    memory[name] = Adamantium.freeze_object(value)
+    memory[name] = value
+  end
+
+  # Return memoized value or store yield result
+  #
+  # @param [#to_s] name
+  #
+  # @return [Object]
+  #
+  # @yield
+  #
+  # @api private
+  #
+  def access(name)
+    memory.fetch(name) do 
+      store_memory(name, yield)
+    end
   end
 end # module Adamantium
 
 require 'adamantium/module_methods'
 require 'adamantium/class_methods'
+require 'adamantium/freezer'

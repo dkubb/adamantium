@@ -2,6 +2,7 @@ module Adamantium
   # Methods mixed in to adamantium modules
   module ModuleMethods
 
+
     # Hook called when module is included
     #
     # @param [Module] mod
@@ -11,7 +12,7 @@ module Adamantium
     #
     # @api private
     def included(mod)
-      Adamantium.included(mod)
+      Adamantium.infect(mod)
       self
     end
 
@@ -27,7 +28,9 @@ module Adamantium
     #
     # @api public
     def memoize(*methods)
-      methods.each { |method| memoize_method(method) }
+      options = methods.last.kind_of?(Hash) ? methods.pop : {}
+      method_freezer = Freezer.parse(options) { freezer }
+      methods.each { |method| memoize_method(method, method_freezer) }
       self
     end
 
@@ -37,13 +40,15 @@ module Adamantium
     #
     # @param [#to_s] method
     #   a method to memoize
+    # @param [#call] freezer
+    #   a freezer for memoized values
     #
     # @return [undefined]
     #
     # @api private
-    def memoize_method(method)
+    def memoize_method(method, freezer)
       visibility = method_visibility(method)
-      define_memoize_method(method)
+      define_memoize_method(method, freezer)
       send(visibility, method)
     end
 
@@ -51,18 +56,19 @@ module Adamantium
     #
     # @param [Symbol] method
     #   the name of the method
+    # @param [#call] freezer
+    #   a freezer for memoized values
     #
     # @return [undefined]
     #
     # @api private
-    def define_memoize_method(method)
+    def define_memoize_method(method, freezer)
       original = instance_method(method)
       undef_method(method)
       define_method(method) do |*args|
-        if memory.key?(method)
-          memoized(method)
-        else
-          store_memory(method, original.bind(self).call(*args))
+        access(method) do
+          value = original.bind(self).call(*args)
+          freezer.call(value)
         end
       end
     end

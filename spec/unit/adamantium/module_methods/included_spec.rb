@@ -9,7 +9,7 @@ describe Adamantium::ModuleMethods, '#included' do
   let(:object) { AdamantiumSpecs::Object }
 
   before do
-    Adamantium.should_receive(:included).with(object).and_return(Adamantium)
+    Adamantium.should_receive(:infect).with(object).and_return(Adamantium)
   end
 
   it_should_behave_like 'a command method'

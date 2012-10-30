@@ -26,24 +26,95 @@ Examples
 require 'adamantium'
 require 'securerandom'
 
-class Foo
+class Example
+  # Inclusion of Adamantium defaults to deep freeze behavior 
+  # of constructor and memoizer
+
   include Adamantium
 
-  def bar
-    SecureRandom.hex(6)
+  # Instance and attributes (ivars) are frozen per default
+  # Example:
+  #
+  # object = Example.new
+  # object.frozen?           # => true
+  # object.attribute.frozen? # => true
+  #
+  def initialize
+    @attribute = "foo bar"
   end
+  attr_reader :attribute
 
-  memoize :bar
+  # Memoized method with deeply frozen value (default)
+  # Example: 
+  # 
+  # object = Example.new
+  # object.random => ["abcdef"]
+  # object.random => ["abcdef"]
+  # object.random.frozen? => true
+  # object.random[0].frozen? => true
+  #
+  def random
+    [SecureRandom.hex(6)]
+  end
+  memoize :random
+
+  # Memoized method with non frozen value
+  # Example: 
+  # 
+  # object = Example.new
+  # object.buffer         # => <StringIO:abcdef>
+  # object.buffer         # => <StringIO:abcdef>
+  # object.buffer.frozen? # => false
+  #
+  def buffer
+    StringIO.new
+  end
+  memoize :buffer, :freezer => :noop
+
+  # Memoized method with nondeeply frozen value
+  # Example: 
+  # 
+  # object = Example.new
+  # object.random2 => ["abcdef"]
+  # object.random2 => ["abcdef"]
+  # object.random2.frozen? => true
+  # object.random2[0].frozen? => false
+  #
+  def random2
+    [SecureRandom.hex(6)]
+  end
+  memoize :random2, :freezer => :flat
 end
 
-object = Foo.new
-object.bar  # => "abcdef"
-# Value is memoized
-object.bar  # => "abcdef"
-# Returns the same object on all calls
-object.bar.equal?(object.bar)  # => true
-# Object is frozen
-object.frozen?  # => true
+class FlatExample
+  # Inclusion of Adamantium::Flat defaults do non deep frozen behavior
+  # for memoizer and constructor
+
+  include Adamantium::Flat
+
+  # Instace is frozen but attribute is not
+  # object = FlatExample.new
+  # object.frozen?           # => true
+  # object.attribute.frozen? # => false
+  def initialize
+    @attribute = "foo bar"
+  end
+  attr_reader :attribute
+
+  # Memoized method with flat frozen value (default)
+  # Example: 
+  # 
+  # object = Example.new
+  # object.random => ["abcdef"]
+  # object.random => ["abcdef"]
+  # object.random.frozen? => true
+  # object.random[0].frozen? => false
+  #
+  def random
+    [SecureRandom.hex(6)]
+  end
+  memoize :random
+end
 ```
 
 Credits
@@ -68,7 +139,7 @@ License
 -------
 
 Copyright (c) 2009-2012 Dan Kubb
-Copyright (c) 2012 Markus Schirp (packaging)
+Copyright (c) 2012 Markus Schirp 
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
