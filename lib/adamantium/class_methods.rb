@@ -12,7 +12,7 @@ module Adamantium
     #
     # @api public
     def new(*)
-      freezer.call(super)
+      freezer.freeze(super)
     end
 
   end # module ClassMethods

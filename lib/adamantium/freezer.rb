@@ -44,7 +44,7 @@ module Adamantium
     #
     # @api private
     def self.freeze_value(value)
-      value.frozen? ? value : do_freeze(value.dup)
+      value.frozen? ? value : freeze(value.dup)
     end
     private_class_method :freeze_value
 
@@ -57,10 +57,9 @@ module Adamantium
       # @return [undefined]
       #
       # @api private
-      def self.do_freeze(value)
+      def self.freeze(value)
         value.freeze
       end
-      private_class_method :do_freeze
       public_class_method :call
     end
 
@@ -73,10 +72,9 @@ module Adamantium
       # @return [undefined]
       #
       # @api private
-      def self.do_freeze(value)
+      def self.freeze(value)
         IceNine.deep_freeze(value)
       end
-      private_class_method :do_freeze
       public_class_method :call
     end
 
