@@ -20,7 +20,7 @@ describe Adamantium do
   end
 
   context 'default' do
-    let(:mixin) { described_class }
+    let(:mixin) { Adamantium }
 
     subject { class_under_test.new }
 
@@ -36,7 +36,7 @@ describe Adamantium do
   end
 
   context 'flat' do
-    let(:mixin) { described_class::Flat }
+    let(:mixin) { Adamantium::Flat }
 
     subject { class_under_test.new }
 
