@@ -12,8 +12,18 @@ module Adamantium
     #
     # @api private
     def included(mod)
-      Adamantium.infect(mod)
+      Adamantium.included(mod)
       self
+    end
+
+    # Return default deep freezer
+    #
+    # @return [Freezer::Deep]
+    #
+    # @api private
+    #
+    def freezer
+      Freezer::Deep
     end
 
     # Memoize a list of methods

@@ -15,16 +15,6 @@ module Adamantium
       IceNine.deep_freeze(super)
     end
 
-    # Return deep freezer
-    #
-    # @return [Freezer::Deep]
-    #
-    # @api private
-    #
-    def freezer
-      Freezer::Deep
-    end
-
   end # module ClassMethods
 
 end

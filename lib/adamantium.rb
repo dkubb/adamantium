@@ -44,7 +44,6 @@ module Adamantium
   #
   # @api private
   def self.included(descendant)
-    super
     descendant.extend ModuleMethods if descendant.kind_of?(Module)
     descendant.extend ClassMethods  if descendant.kind_of?(Class)
     self
@@ -93,7 +92,7 @@ module Adamantium
   # @api public
   def memoize(name, value)
     unless memory.key?(name)
-      store_memory(name, freezer.call(value)) 
+      store_memory(name, freeze_object(value))
     end
 
     self
@@ -120,6 +119,18 @@ private
   # @api private
   def memory
     @__memory ||= Memory.new
+  end
+
+  # Freeze object
+  #
+  # @param [Object] object
+  #   an object to be frozen
+  #
+  # @return [Object]
+  #
+  # @api private
+  def freeze_object(object)
+    freezer.call(object)
   end
 
   # Return class level freezer
