@@ -76,9 +76,10 @@ module Adamantium
       original = instance_method(method)
       undef_method(method)
       define_method(method) do |*args|
-        access(method) do
+        memory.fetch(method) do 
           value = original.bind(self).call(*args)
-          freezer.call(value)
+          frozen = freezer.call(value)
+          store_memory(method, frozen)
         end
       end
     end

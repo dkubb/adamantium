@@ -157,22 +157,6 @@ private
   def store_memory(name, value)
     memory[name] = value
   end
-
-  # Return memoized value or store yield result
-  #
-  # @param [#to_s] name
-  #
-  # @return [Object]
-  #
-  # @yield
-  #
-  # @api private
-  #
-  def access(name)
-    memory.fetch(name) do 
-      store_memory(name, yield)
-    end
-  end
 end # module Adamantium
 
 require 'adamantium/module_methods'
