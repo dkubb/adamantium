@@ -19,6 +19,16 @@ describe Adamantium do
     end
   end
 
+  context 'inherited' do
+    let(:mixin) { Adamantium::Flat }
+
+    subject { Class.new(class_under_test).new }
+
+    it 'should return memoized value' do
+      subject.memoized
+    end
+  end
+
   context 'default' do
     let(:mixin) { Adamantium }
 

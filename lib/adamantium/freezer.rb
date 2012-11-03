@@ -26,7 +26,7 @@ module Adamantium
     # @api public
     def self.call(object)
       case object
-      when Numeric, TrueClass, FalseClass, NilClass, Symbol
+      when Numeric, TrueClass, FalseClass, NilClass, Symbol, Class, Module
         object
       else
         freeze_value(object)
