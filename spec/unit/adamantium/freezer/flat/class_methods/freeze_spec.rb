@@ -12,4 +12,3 @@ describe Adamantium::Freezer::Flat, '.freeze' do
     should be(value)
   end
 end
-

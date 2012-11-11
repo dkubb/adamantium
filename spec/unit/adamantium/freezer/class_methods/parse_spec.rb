@@ -20,7 +20,7 @@ describe Adamantium::Freezer, '.parse' do
       should be(freezer)
     end
   end
-  
+
   context 'with any other key' do
     let(:options) { { :other => :key } }
 

@@ -6,7 +6,7 @@ describe Adamantium do
 
     Class.new do
       include mixin
-      
+
       def initialize
         @attribute = Object.new
       end

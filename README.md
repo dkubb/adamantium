@@ -27,7 +27,7 @@ require 'adamantium'
 require 'securerandom'
 
 class Example
-  # Inclusion of Adamantium defaults to deep freeze behavior 
+  # Inclusion of Adamantium defaults to deep freeze behavior
   # of constructor and memoizer
 
   include Adamantium
@@ -45,8 +45,8 @@ class Example
   attr_reader :attribute
 
   # Memoized method with deeply frozen value (default)
-  # Example: 
-  # 
+  # Example:
+  #
   # object = Example.new
   # object.random => ["abcdef"]
   # object.random => ["abcdef"]
@@ -59,8 +59,8 @@ class Example
   memoize :random
 
   # Memoized method with non frozen value
-  # Example: 
-  # 
+  # Example:
+  #
   # object = Example.new
   # object.buffer         # => <StringIO:abcdef>
   # object.buffer         # => <StringIO:abcdef>
@@ -72,8 +72,8 @@ class Example
   memoize :buffer, :freezer => :noop
 
   # Memoized method with nondeeply frozen value
-  # Example: 
-  # 
+  # Example:
+  #
   # object = Example.new
   # object.random2 => ["abcdef"]
   # object.random2 => ["abcdef"]
@@ -102,8 +102,8 @@ class FlatExample
   attr_reader :attribute
 
   # Memoized method with flat frozen value (default)
-  # Example: 
-  # 
+  # Example:
+  #
   # object = Example.new
   # object.random => ["abcdef"]
   # object.random => ["abcdef"]
@@ -139,7 +139,7 @@ License
 -------
 
 Copyright (c) 2009-2012 Dan Kubb
-Copyright (c) 2012 Markus Schirp 
+Copyright (c) 2012 Markus Schirp
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

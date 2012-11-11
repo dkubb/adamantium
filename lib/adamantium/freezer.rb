@@ -1,10 +1,10 @@
 module Adamantium
+
   # Abstract base class for freezers
   #
   # TODO: Use dkubb/abstract_class?
   #
   # Better pattern for singleton inheritance/shared code
-  #
   class Freezer
 
     private_class_method :new
@@ -32,6 +32,7 @@ module Adamantium
         freeze_value(object)
       end
     end
+
     private_class_method :call
 
     # Returns a frozen value
@@ -46,10 +47,12 @@ module Adamantium
     def self.freeze_value(value)
       value.frozen? ? value : freeze(value.dup)
     end
+
     private_class_method :freeze_value
 
     # Freezer that does not deep freeze
     class Flat < self
+
       # Freeze value
       #
       # @param [Object] value
@@ -65,6 +68,7 @@ module Adamantium
 
     # Freezer that does deep freeze
     class Deep < self
+
       # Deep freeze value
       #
       # @param [Object] value
@@ -94,7 +98,7 @@ module Adamantium
     #
     # @api private
     def self.get(name)
-      case name 
+      case name
       when :noop
         Noop
       when :deep
@@ -128,5 +132,6 @@ module Adamantium
 
       get(name)
     end
+
   end
 end
