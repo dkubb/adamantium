@@ -18,8 +18,8 @@ shared_examples_for 'memoizes method' do
   specification = proc do
     subject
     file, line = object.new.send(method).first.split(':')[0, 2]
-    File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium.rb', __FILE__))
-    line.to_i.should eql(211)
+    File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium/module_methods.rb', __FILE__))
+    line.to_i.should eql(80)
   end
 
   it 'sets the file and line number properly' do
