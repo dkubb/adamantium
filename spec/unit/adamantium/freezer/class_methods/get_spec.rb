@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Adamantium::Freezer, '.get' do
   subject { object.get(name) }
+
   let(:object) { described_class }
 
   context 'with :deep' do

@@ -7,9 +7,9 @@ describe Adamantium, '#memoized' do
   subject { object.memoized(method) }
 
   let(:described_class) { Class.new(AdamantiumSpecs::Object) }
-  let(:method)          { :test                             }
-  let(:value)           { String.new.freeze                 }
-  let(:object)          { described_class.new               }
+  let(:method)          { :test                              }
+  let(:value)           { String.new.freeze                  }
+  let(:object)          { described_class.new                }
 
   before do
     described_class.memoize(method)

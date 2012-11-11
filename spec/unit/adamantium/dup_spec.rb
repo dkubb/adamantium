@@ -7,7 +7,7 @@ describe Adamantium, '#dup' do
   subject { object.dup }
 
   let(:described_class) { AdamantiumSpecs::Object }
-  let(:object)          { described_class.new    }
+  let(:object)          { described_class.new     }
 
   it { should equal(object) }
 end
