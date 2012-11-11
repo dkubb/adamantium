@@ -127,11 +127,11 @@ module Adamantium
         raise OptionError, "Unknown option key(s) for memoizer #{keys.inspect}"
       end
 
-      name = options.fetch(:freezer) do
-        return yield
+      if options.key?(:freezer)
+        get(options.fetch(:freezer))
+      else
+        yield
       end
-
-      get(name)
     end
 
   end
