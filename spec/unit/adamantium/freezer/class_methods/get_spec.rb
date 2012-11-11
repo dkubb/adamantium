@@ -27,7 +27,7 @@ describe Adamantium::Freezer, '.get' do
     let(:name) { :other }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(described_class::UnknownError, "Freezer with name :other is unknown")
+      expect { subject }.to raise_error(described_class::UnknownFreezerError, 'Freezer with name :other is unknown')
     end
   end
 end

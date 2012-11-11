@@ -85,7 +85,8 @@ module Adamantium
     Noop = lambda { |object| object }.freeze
 
     # Error raised when freezer cannot be found
-    class UnknownError < RuntimeError; end
+    class UnknownFreezerError < RuntimeError; end
+
     # Error raised when memoizer options contain unknown keys
     class OptionError < RuntimeError; end
 
@@ -106,7 +107,7 @@ module Adamantium
       when :flat
         Flat
       else
-        raise UnknownError, "Freezer with name #{name.inspect} is unknown"
+        raise UnknownFreezerError, "Freezer with name #{name.inspect} is unknown"
       end
     end
 
