@@ -89,13 +89,13 @@ module Adamantium
     # @param [String, Symbol] method
     #   the name of the method
     #
-    # @return [String]
+    # @return [Symbol]
     #
     # @api private
     def method_visibility(method)
-      if    private_method_defined?(method)   then 'private'
-      elsif protected_method_defined?(method) then 'protected'
-      else                                         'public'
+      if    private_method_defined?(method)   then :private
+      elsif protected_method_defined?(method) then :protected
+      else                                         :public
       end
     end
 
