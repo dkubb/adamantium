@@ -27,6 +27,7 @@ group :metrics do
   gem 'roodi',           '~> 2.1.0'
   gem 'yardstick',       '~> 0.7.0'
   gem 'yard-spellcheck', '~> 0.1.5'
+  gem 'simplecov'
 
   platforms :mri_18 do
     gem 'arrayfields', '~> 4.7.4'  # for metric_fu

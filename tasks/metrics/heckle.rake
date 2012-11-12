@@ -200,7 +200,9 @@ begin
     end
   end
 rescue LoadError
-  task :heckle => :coverage do
-    $stderr.puts 'Heckle or mspec is not available. In order to run heckle, you must: gem install heckle mspec'
+  namespace :metrics do
+    task :heckle => :coverage do
+      $stderr.puts 'Heckle or mspec is not available. In order to run heckle, you must: gem install heckle mspec'
+    end
   end
 end
