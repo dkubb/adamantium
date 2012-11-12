@@ -117,6 +117,10 @@ module Adamantium
     #   an options hash
     #
     # @return [#call]
+    #   if freezer option was present
+    #
+    # @return [nil]
+    #   otherwise
     #
     # @api private
     #
@@ -127,12 +131,9 @@ module Adamantium
         raise OptionError, "Unknown option key(s) for memoizer #{keys.inspect}"
       end
 
-      if options.key?(:freezer)
-        get(options.fetch(:freezer))
-      else
-        yield
-      end
-    end
+      name = options.fetch(:freezer) { return }
 
+      get(name)
+    end
   end
 end

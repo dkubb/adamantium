@@ -1,15 +1,14 @@
 require 'spec_helper'
 
 describe Adamantium::Freezer, '.parse' do
-  subject { object.parse(options, &block) }
+  subject { object.parse(options) }
 
   let(:object)  { described_class     }
-  let(:block)   { lambda { :default } }
   let(:freezer) { mock('Freezer')     }
 
   context 'with empty options' do
-    let(:options) { {}                  }
-    it            { should be(:default) }
+    let(:options) { {}             }
+    it            { should be(nil) }
   end
 
   context 'with :freezer key' do

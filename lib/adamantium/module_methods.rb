@@ -39,7 +39,7 @@ module Adamantium
     # @api public
     def memoize(*methods)
       options        = methods.last.kind_of?(Hash) ? methods.pop : {}
-      method_freezer = Freezer.parse(options) { freezer }
+      method_freezer = Freezer.parse(options) || freezer
       methods.each { |method| memoize_method(method, method_freezer) }
       self
     end
