@@ -47,7 +47,7 @@ begin
       map     = NameMap.new
 
       heckle_caught_modules = Hash.new { |hash, key| hash[key] = [] }
-      unhandled_mutations = 0
+      uncovered_methods = 0
 
       ObjectSpace.each_object(Module) do |mod|
         next unless mod.name =~ /\A#{root_module_regexp}(?::|\z)/
@@ -167,20 +167,19 @@ begin
               case line = line.chomp
                 when "The following mutations didn't cause test failures:"
                   heckle_caught_modules[mod.name] << method
-                when '+++ mutation'
-                  unhandled_mutations += 1
+                  uncovered_methods += 1
               end
             end
           end
         end
       end
 
-      if unhandled_mutations > 0
+      if uncovered_methods > 0
         error_message_lines = [ "*************\n" ]
 
-        error_message_lines << "Heckle found #{unhandled_mutations} " \
-          "mutation#{"s" unless unhandled_mutations == 1} " \
-          "that didn't cause spec violations\n"
+        error_message_lines << "Heckle found #{uncovered_methods} " \
+          "method#{"s" unless uncovered_methods == 1} " \
+          "where mutations didn't cause spec violations\n"
 
         heckle_caught_modules.each do |mod, methods|
           error_message_lines << "#{mod} contains the following " \
