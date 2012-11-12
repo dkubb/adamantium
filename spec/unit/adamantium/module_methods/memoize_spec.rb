@@ -10,19 +10,29 @@ shared_examples_for 'memoizes method' do
     instance.send(method).should equal(instance.send(method))
   end
 
-  it 'creates a method that returns a frozen value' do
+  it 'creates a method that returns a same value' do
     subject
-    object.new.send(method).should be_frozen
+    instance = object.new
+    first =  instance.send(method)
+    second = instance.send(method)
+    first.should be(second)
   end
 
   specification = proc do
     subject
-    file, line = object.new.send(method).first.split(':')[0, 2]
-    File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium/module_methods.rb', __FILE__))
-    line.to_i.should eql(80)
+    if method != :some_state
+      file, line = object.new.send(method).first.split(':')[0, 2]
+      File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium/module_methods.rb', __FILE__))
+      line.to_i.should eql(80)
+    end
   end
 
   it 'sets the file and line number properly' do
+    # Exclude example for methot that does not return caller
+    if method == :some_method
+      return
+    end
+
     if RUBY_PLATFORM.include?('java')
       pending('Kernel#caller returns the incorrect line number in JRuby', &specification)
     else
@@ -49,9 +59,45 @@ shared_examples_for 'memoizes method' do
 end
 
 describe Adamantium::ModuleMethods, '#memoize' do
-  subject { object.memoize(method) }
+  subject { object.memoize(method, options) }
+  let(:options) { {} }
 
-  let(:object) { Class.new(AdamantiumSpecs::Object) }
+  let(:object) do 
+    Class.new(AdamantiumSpecs::Object) do
+      def some_state
+        Object.new
+      end
+    end
+  end
+
+  context 'with :noop freezer option' do
+    let(:method)  { :some_state       }
+    let(:options) { { :freezer => :noop } }
+
+    it_should_behave_like 'a command method'
+    it_should_behave_like 'memoizes method'
+
+    it 'is still a public method' do
+      should be_public_method_defined(method)
+    end
+
+    it 'creates a method that returns a non frozen value' do
+      subject
+      object.new.send(method).should_not be_frozen
+    end
+  end
+
+  context 'memoized method that returns generated values' do
+    let(:method) { :some_state }
+
+    it_should_behave_like 'a command method'
+    it_should_behave_like 'memoizes method'
+
+    it 'creates a method that returns a frozen value' do
+      subject
+      object.new.send(method).should be_frozen
+    end
+  end
 
   context 'public method' do
     let(:method) { :public_method }
@@ -61,6 +107,11 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it 'is still a public method' do
       should be_public_method_defined(method)
+    end
+
+    it 'creates a method that returns a frozen value' do
+      subject
+      object.new.send(method).should be_frozen
     end
   end
 
@@ -73,6 +124,11 @@ describe Adamantium::ModuleMethods, '#memoize' do
     it 'is still a protected method' do
       should be_protected_method_defined(method)
     end
+
+    it 'creates a method that returns a frozen value' do
+      subject
+      object.new.send(method).should be_frozen
+    end
   end
 
   context 'private method' do
@@ -83,6 +139,11 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it 'is still a private method' do
       should be_private_method_defined(method)
+    end
+
+    it 'creates a method that returns a frozen value' do
+      subject
+      object.new.send(method).should be_frozen
     end
   end
 end
