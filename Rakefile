@@ -2,4 +2,4 @@
 
 require 'devtools'
 
-Devtools.init(__FILE__)
+Devtools.init
