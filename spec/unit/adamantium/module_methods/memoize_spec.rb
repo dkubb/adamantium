@@ -62,7 +62,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
   subject { object.memoize(method, options) }
   let(:options) { {} }
 
-  let(:object) do 
+  let(:object) do
     Class.new(AdamantiumSpecs::Object) do
       def some_state
         Object.new
