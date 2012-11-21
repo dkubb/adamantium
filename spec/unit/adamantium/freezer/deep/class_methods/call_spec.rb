@@ -43,6 +43,14 @@ describe Adamantium::Freezer::Deep, '.call' do
     it { should equal(value) }
   end
 
+  context 'with a unbound method value' do
+    let(:value) { "".method(:length) }
+
+    it { should equal(value) }
+
+    it { should_not be_frozen }
+  end
+
   context 'with a module value' do
     let(:value) { Module.new }
 
