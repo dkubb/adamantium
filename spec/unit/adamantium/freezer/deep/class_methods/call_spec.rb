@@ -76,7 +76,7 @@ describe Adamantium::Freezer::Deep, '.call' do
 
     it { should equal(value) }
 
-    it { should be_frozen }
+    it { should_not be_frozen }
   end
 
   context 'with a class value' do
@@ -84,7 +84,7 @@ describe Adamantium::Freezer::Deep, '.call' do
 
     it { should equal(value) }
 
-    it { should be_frozen }
+    it { should_not be_frozen }
   end
 
   context 'with an unfrozen value' do

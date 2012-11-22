@@ -18,14 +18,11 @@ module Adamantium
       Method,
     ].freeze
 
-    # A list of types that should not be copied
-    NO_COPY = [
+    # A list of types that should not be frozen
+    NO_FREEZE = [
       Class,
       Module,
     ].freeze
-
-    # A list of types that will not be copied
-    SKIP_COPY = (NOT_COPYABLE | NO_COPY).freeze
 
     private_class_method :new
 
@@ -45,7 +42,12 @@ module Adamantium
     #
     # @api public
     def self.call(object)
-      object.frozen? ? object : freeze(copy_object(object))
+      case object
+      when *NO_FREEZE
+        object
+      else
+        object.frozen? ? object : freeze(copy_object(object))
+      end
     end
 
     private_class_method :call
@@ -61,7 +63,7 @@ module Adamantium
     # @api private
     def self.copy_object(object)
       case object
-      when *SKIP_COPY
+      when *NOT_COPYABLE
         object
       else
         object.dup
