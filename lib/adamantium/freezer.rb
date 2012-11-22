@@ -7,21 +7,23 @@ module Adamantium
   # Better pattern for singleton inheritance/shared code
   class Freezer
 
-    # A list of types that cannot be copied
+    # A list of types that should not be frozen
+    NOT_FREEZABLE = [
+      Class,
+      Module,
+    ].freeze
+
+    # A list of types that should not be copied
     NOT_COPYABLE = [
       Numeric,
       TrueClass,
       FalseClass,
       NilClass,
       Symbol,
-      UnboundMethod,
-      Method,
-    ].freeze
-
-    # A list of types that should not be frozen
-    NO_FREEZE = [
       Class,
       Module,
+      UnboundMethod,
+      Method,
     ].freeze
 
     private_class_method :new
@@ -43,7 +45,7 @@ module Adamantium
     # @api public
     def self.call(object)
       case object
-      when *NO_FREEZE
+      when *NOT_FREEZABLE
         object
       else
         object.frozen? ? object : freeze(copy_object(object))
