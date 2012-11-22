@@ -56,7 +56,7 @@ module Adamantium
     #   an object to copy
     #
     # @return [Object]
-    #   if it can be copied return one, otherwise return the object as-is
+    #   if it can be copied return a copy, otherwise return the object as-is
     #
     # @api private
     def self.copy_object(object)
