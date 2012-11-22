@@ -75,7 +75,8 @@ UncommunicativeVariableName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 SimulatedPolymorphism:
-  exclude: []
+  exclude:
+  - Adamantium::Freezer  # TODO: figure out how to remove extra tests on object
   enabled: true
   max_ifs: 1
 DataClump:
