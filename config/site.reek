@@ -46,7 +46,7 @@ UncommunicativeModuleName:
   - !ruby/regexp /[0-9]$/
 NestedIterators:
   ignore_iterators: []
-  exclude: 
+  exclude:
   - Adamantium::ModuleMethods#define_memoize_method # 2 levels
   enabled: true
   max_allowed_nesting: 1

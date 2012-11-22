@@ -21,13 +21,17 @@ platform :jruby do
 end
 
 group :metrics do
-  gem 'flay',            '~> 1.4.2'
-  gem 'flog',            '~> 2.5.1'
-  gem 'reek',            '~> 1.2.8', :github => 'dkubb/reek'
-  gem 'roodi',           '~> 2.1.0'
-  gem 'yardstick',       '~> 0.7.0'
-  gem 'yard-spellcheck', '~> 0.1.5'
+  gem 'flay',      '~> 1.4.2'
+  gem 'flog',      '~> 2.5.1'
+  gem 'reek',      '~> 1.2.8', :github => 'dkubb/reek'
+  gem 'roodi',     '~> 2.1.0'
+  gem 'yardstick', '~> 0.7.0'
   gem 'simplecov'
+
+  platforms :ruby_18, :ruby_19 do
+    # this indirectly depends on ffi which does not build on ruby-head
+    gem 'yard-spellcheck', '~> 0.1.5'
+  end
 
   platforms :mri_18 do
     gem 'arrayfields', '~> 4.7.4'  # for metric_fu
