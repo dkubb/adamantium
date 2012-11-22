@@ -11,36 +11,48 @@ describe Adamantium::Freezer::Deep, '.call' do
     let(:value) { 1 }
 
     it { should equal(value) }
+
+    it { should_not be_frozen }
   end
 
   context 'with a true value' do
     let(:value) { true }
 
     it { should equal(value) }
+
+    it { should_not be_frozen }
   end
 
   context 'with a false value' do
     let(:value) { false }
 
     it { should equal(value) }
+
+    it { should_not be_frozen }
   end
 
   context 'with a nil value' do
     let(:value) { nil }
 
     it { should equal(value) }
+
+    it { should_not be_frozen }
   end
 
   context 'with a symbol value' do
     let(:value) { :symbol }
 
     it { should equal(value) }
+
+    it { should_not be_frozen }
   end
 
   context 'with a frozen value' do
     let(:value) { String.new.freeze }
 
     it { should equal(value) }
+
+    it { should be_frozen }
   end
 
   context 'with a method value' do
@@ -48,7 +60,7 @@ describe Adamantium::Freezer::Deep, '.call' do
 
     it { should equal(value) }
 
-    it { should_not be_frozen }
+    it { should be_frozen }
   end
 
   context 'with a unbound method value' do
@@ -56,7 +68,7 @@ describe Adamantium::Freezer::Deep, '.call' do
 
     it { should equal(value) }
 
-    it { should_not be_frozen }
+    it { should be_frozen }
   end
 
   context 'with a module value' do
@@ -64,7 +76,7 @@ describe Adamantium::Freezer::Deep, '.call' do
 
     it { should equal(value) }
 
-    it { should_not be_frozen }
+    it { should be_frozen }
   end
 
   context 'with a class value' do
@@ -72,7 +84,7 @@ describe Adamantium::Freezer::Deep, '.call' do
 
     it { should equal(value) }
 
-    it { should_not be_frozen }
+    it { should be_frozen }
   end
 
   context 'with an unfrozen value' do
@@ -80,9 +92,7 @@ describe Adamantium::Freezer::Deep, '.call' do
 
     it { should_not equal(value) }
 
-    it { should be_instance_of(String) }
-
-    it { should == value }
+    it { should eql(value) }
 
     it { should be_frozen }
   end
@@ -93,5 +103,11 @@ describe Adamantium::Freezer::Deep, '.call' do
     it 'does freeze inner values' do
       subject.first.should be_frozen
     end
+
+    it { should_not equal(value) }
+
+    it { should eql(value) }
+
+    it { should be_frozen }
   end
 end
