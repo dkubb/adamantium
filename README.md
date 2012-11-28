@@ -11,12 +11,24 @@ It allows to make objects immutable in an unobtrusive way.
 Installation
 ------------
 
-There is no gem release yet so use git source.
+With Rubygems:
 
-In your **Gemfile**:
+```bash
+$ gem install adamantium
+$ irb -rubygems
+>> require 'adamantium'
+=> true
+```
 
-``` ruby
-gem 'adamantium', :git => 'https://github.com/dkubb/adamantium.git'
+With git and local working copy:
+
+```bash
+$ git clone git://github.com/dkubb/adamantium.git
+$ cd adamantium
+$ rake install
+$ irb -rubygems
+>> require 'adamantium'
+=> true
 ```
 
 Examples
