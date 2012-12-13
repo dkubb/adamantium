@@ -111,6 +111,8 @@ module Adamantium
       end
     end
 
+    ALLOWED_KEYS = [:freezer].freeze
+
     # Parse freezer options
     #
     # @param [Hash] options
@@ -125,10 +127,10 @@ module Adamantium
     # @api private
     #
     def self.parse(options)
-      keys = options.keys - [:freezer]
+      overflow = options.keys - ALLOWED_KEYS
 
-      unless keys.empty?
-        raise OptionError, "Unknown option key(s) for memoizer #{keys.inspect}"
+      unless overflow.empty?
+        raise OptionError, "Unknown option key(s) for memoizer #{overflow.inspect}"
       end
 
       return unless options.key?(:freezer)
