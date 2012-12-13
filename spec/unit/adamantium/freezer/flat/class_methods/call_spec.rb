@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Adamantium::Freezer::Flat, '.call' do
   subject { object.call(value) }
 
-  let(:object) { self.class.described_type }
+  let(:object) { described_class }
 
   context 'with a numeric value' do
     let(:value) { 1 }
