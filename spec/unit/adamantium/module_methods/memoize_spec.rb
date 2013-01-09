@@ -23,7 +23,7 @@ shared_examples_for 'memoizes method' do
     if method != :some_state
       file, line = object.new.send(method).first.split(':')[0, 2]
       File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium/module_methods.rb', __FILE__))
-      line.to_i.should eql(80)
+      line.to_i.should eql(84)
     end
   end
 
@@ -67,6 +67,14 @@ describe Adamantium::ModuleMethods, '#memoize' do
       def some_state
         Object.new
       end
+    end
+  end
+  
+  context 'on method with arguments' do
+    let(:method) { :argumented }
+
+    it 'should raise error' do
+      expect { subject }.to raise_error(ArgumentError, 'Cannot memoize method with unzero arity')
     end
   end
 

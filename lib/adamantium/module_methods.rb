@@ -48,24 +48,28 @@ module Adamantium
 
     # Memoize the named method
     #
-    # @param [#to_s] method
-    #   a method to memoize
+    # @param [#to_s] method_name
+    #   a method name to memoize
     # @param [#call] freezer
     #   a freezer for memoized values
     #
     # @return [undefined]
     #
     # @api private
-    def memoize_method(method, freezer)
-      visibility = method_visibility(method)
+    def memoize_method(method_name, freezer)
+      method = instance_method(method_name)
+      unless method.arity.zero?
+        raise ArgumentError, 'Cannot memoize method with unzero arity'
+      end
+      visibility = method_visibility(method_name)
       define_memoize_method(method, freezer)
-      send(visibility, method)
+      send(visibility, method_name)
     end
 
     # Define a memoized method that delegates to the original method
     #
-    # @param [Symbol] method
-    #   the name of the method
+    # @param [UnboundMethod] method
+    #   the method to memoize
     # @param [#call] freezer
     #   a freezer for memoized values
     #
@@ -73,13 +77,13 @@ module Adamantium
     #
     # @api private
     def define_memoize_method(method, freezer)
-      original = instance_method(method)
-      undef_method(method)
-      define_method(method) do |*args|
-        memory.fetch(method) do
-          value  = original.bind(self).call(*args)
+      method_name = method.name
+      undef_method(method_name)
+      define_method(method_name) do |*args|
+        memory.fetch(method_name) do
+          value  = method.bind(self).call(*args)
           frozen = freezer.call(value)
-          store_memory(method, frozen)
+          store_memory(method_name, frozen)
         end
       end
     end
