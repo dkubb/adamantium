@@ -77,7 +77,7 @@ module Adamantium
     #
     # @api private
     def define_memoize_method(method, freezer)
-      method_name = method.name
+      method_name = method.name.to_sym
       undef_method(method_name)
       define_method(method_name) do |*args|
         memory.fetch(method_name) do
