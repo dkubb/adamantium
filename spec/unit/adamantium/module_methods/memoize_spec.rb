@@ -74,7 +74,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
     let(:method) { :argumented }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError, 'Cannot memoize method with unzero arity')
+      expect { subject }.to raise_error(ArgumentError, 'Cannot memoize method with nonzero arity')
     end
   end
 
