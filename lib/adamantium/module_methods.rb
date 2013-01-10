@@ -58,7 +58,7 @@ module Adamantium
     # @api private
     def memoize_method(method_name, freezer)
       method = instance_method(method_name)
-      unless method.arity.zero?
+      if method.arity.nonzero?
         raise ArgumentError, 'Cannot memoize method with nonzero arity'
       end
       visibility = method_visibility(method_name)
