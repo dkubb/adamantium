@@ -16,6 +16,11 @@ shared_examples_for 'memoizes method' do
     instance.send(method).should be(instance.send(method))
   end
 
+  it 'creates a method with an arity of 0' do
+    subject
+    object.new.method(method).arity.should be_zero
+  end
+
   context 'when the initializer calls the memoized method' do
     before do
       method = self.method
