@@ -30,7 +30,6 @@ module Adamantium
       super
       descendant.send(:include, Adamantium)
       descendant.extend(self)
-
       self
     end
   end
@@ -94,7 +93,6 @@ module Adamantium
     unless memory.key?(name)
       store_memory(name, freeze_object(value))
     end
-
     self
   end
 

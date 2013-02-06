@@ -13,31 +13,7 @@ shared_examples_for 'memoizes method' do
   it 'creates a method that returns a same value' do
     subject
     instance = object.new
-    first =  instance.send(method)
-    second = instance.send(method)
-    first.should be(second)
-  end
-
-  specification = proc do
-    subject
-    if method != :some_state
-      file, line = object.new.send(method).first.split(':')[0, 2]
-      File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium/module_methods.rb', __FILE__))
-      line.to_i.should eql(84)
-    end
-  end
-
-  it 'sets the file and line number properly' do
-    # Exclude example for methot that does not return caller
-    if method == :some_method
-      return
-    end
-
-    if RUBY_PLATFORM.include?('java')
-      pending('Kernel#caller returns the incorrect line number in JRuby', &specification)
-    else
-      instance_eval(&specification)
-    end
+    instance.send(method).should be(instance.send(method))
   end
 
   context 'when the initializer calls the memoized method' do
@@ -60,6 +36,7 @@ end
 
 describe Adamantium::ModuleMethods, '#memoize' do
   subject { object.memoize(method, options) }
+
   let(:options) { {} }
 
   let(:object) do

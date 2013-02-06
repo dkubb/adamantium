@@ -100,12 +100,9 @@ module Adamantium
     # @api private
     def self.get(name)
       case name
-      when :noop
-        Noop
-      when :deep
-        Deep
-      when :flat
-        Flat
+      when :noop then Noop
+      when :deep then Deep
+      when :flat then Flat
       else
         raise UnknownFreezerError, "Freezer with name #{name.inspect} is unknown"
       end
@@ -126,14 +123,10 @@ module Adamantium
     #
     def self.parse(options)
       keys = options.keys - [:freezer]
-
       unless keys.empty?
         raise OptionError, "Unknown option key(s) for memoizer #{keys.inspect}"
       end
-
-      return unless options.key?(:freezer)
-
-      get(options.fetch(:freezer))
+      get(options.fetch(:freezer)) if options.key?(:freezer)
     end
   end
 end
