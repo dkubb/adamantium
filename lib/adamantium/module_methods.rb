@@ -79,9 +79,9 @@ module Adamantium
     def define_memoize_method(method, freezer)
       method_name = method.name.to_sym
       undef_method(method_name)
-      define_method(method_name) do |*args|
+      define_method(method_name) do 
         memory.fetch(method_name) do
-          value  = method.bind(self).call(*args)
+          value  = method.bind(self).call
           frozen = freezer.call(value)
           store_memory(method_name, frozen)
         end
