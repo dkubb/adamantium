@@ -69,7 +69,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
       end
     end
   end
-  
+
   context 'on method with arguments' do
     let(:method) { :argumented }
 
