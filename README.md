@@ -5,7 +5,7 @@ Create immutable objects
 
 [![Build Status](https://secure.travis-ci.org/dkubb/adamantium.png)](https://travis-ci.org/dkubb/adamantium)
 [![Dependency Status](https://gemnasium.com/dkubb/adamantium.png)](https://gemnasium.com/dkubb/adamantium)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/dkubb/adamantium)
+[![Code Climate](https://codeclimate.com/github/dkubb/adamantium.png)](https://codeclimate.com/github/dkubb/adamantium)
 
 This is a small standalone gem featuring a module ripped out from [veritas](https://github.com/dkubb/veritas).
 It allows to make objects immutable in an unobtrusive way.
