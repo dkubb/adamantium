@@ -43,9 +43,9 @@ group :metrics do
     gem 'map',                  '~> 6.3.0'  # for metric_fu
     gem 'metric_fu',            '~> 2.1.1'
     gem 'mspec',                '~> 1.5.17'
+    gem 'rails_best_practices', '= 1.13.3'  # for metric_fu
     gem 'rcov',                 '~> 1.0.0'
     gem 'ruby2ruby',            '= 1.2.2'   # for heckle
-    gem 'rails_best_practices', '= 1.13.3'  # for metric_fu
   end
 
   platforms :mri_19 do
