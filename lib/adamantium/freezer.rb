@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Adamantium
 
   # Abstract base class for freezers

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Adamantium
 
   # Methods mixed in to adamantium classes
