@@ -18,5 +18,4 @@ module Adamantium
     end
 
   end # module ClassMethods
-
-end
+end # module Adamantium
