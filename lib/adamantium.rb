@@ -157,6 +157,7 @@ private
   def store_memory(name, value)
     memory[name] = value
   end
+
 end # module Adamantium
 
 require 'adamantium/module_methods'

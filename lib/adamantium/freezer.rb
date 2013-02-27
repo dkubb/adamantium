@@ -65,6 +65,7 @@ module Adamantium
       def self.freeze(value)
         value.freeze
       end
+
       public_class_method :call
     end
 
@@ -81,6 +82,7 @@ module Adamantium
       def self.freeze(value)
         IceNine.deep_freeze(value)
       end
+
       public_class_method :call
     end
 
