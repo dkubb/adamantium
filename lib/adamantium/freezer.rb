@@ -9,6 +9,25 @@ module Adamantium
   # Better pattern for singleton inheritance/shared code
   class Freezer
 
+    # A list of types that should not be frozen
+    NOT_FREEZABLE = [
+      Class,
+      Module,
+    ].freeze
+
+    # A list of types that should not be copied
+    NOT_COPYABLE = [
+      Numeric,
+      TrueClass,
+      FalseClass,
+      NilClass,
+      Symbol,
+      Class,
+      Module,
+      UnboundMethod,
+      Method,
+    ].freeze
+
     private_class_method :new
 
     # Attempt to freeze an object
@@ -28,29 +47,34 @@ module Adamantium
     # @api public
     def self.call(object)
       case object
-      when Numeric, TrueClass, FalseClass, NilClass, Symbol, Class, Module, UnboundMethod, Method
+      when *NOT_FREEZABLE
         object
       else
-        freeze_value(object)
+        object.frozen? ? object : freeze(copy_object(object))
       end
     end
 
     private_class_method :call
 
-    # Returns a frozen value
+    # Return a copy of an object if possible
     #
-    # @param [Object] value
-    #   a value to freeze
+    # @param [Object] object
+    #   an object to copy
     #
     # @return [Object]
-    #   if frozen, the value directly, otherwise a frozen copy of the value
+    #   if it can be copied return a copy, otherwise return the object as-is
     #
     # @api private
-    def self.freeze_value(value)
-      value.frozen? ? value : freeze(value.dup)
+    def self.copy_object(object)
+      case object
+      when *NOT_COPYABLE
+        object
+      else
+        object.dup
+      end
     end
 
-    private_class_method :freeze_value
+    private_class_method :copy_object
 
     # Freezer that does not deep freeze
     class Flat < self
