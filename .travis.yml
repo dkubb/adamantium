@@ -14,6 +14,9 @@ rvm:
   - jruby-head
   - rbx-18mode
   - rbx-19mode
+matrix:
+  allow_failures:
+    - rvm: ruby-head
 notifications:
   irc: "irc.freenode.org#datamapper"
   email:
