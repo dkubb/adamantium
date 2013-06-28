@@ -1,12 +1,7 @@
 # encoding: utf-8
 
 require 'adamantium'
-require 'rspec'
-
-# require spec support files and shared behavior
-Dir[File.expand_path('../{support,shared}/**/*.rb', __FILE__)].each do |file|
-  require file
-end
+require 'devtools/spec_helper'
 
 RSpec.configure do |config|
 end
