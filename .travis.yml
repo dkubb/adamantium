@@ -15,7 +15,7 @@ rvm:
   - rbx-18mode
   - rbx-19mode
 matrix:
-  allowed_failures:
+  allow_failures:
     - rvm: ruby-head
 notifications:
   irc: "irc.freenode.org#datamapper"
