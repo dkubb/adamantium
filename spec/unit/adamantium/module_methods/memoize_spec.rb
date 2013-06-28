@@ -13,31 +13,12 @@ shared_examples_for 'memoizes method' do
   it 'creates a method that returns a same value' do
     subject
     instance = object.new
-    first =  instance.send(method)
-    second = instance.send(method)
-    first.should be(second)
+    instance.send(method).should be(instance.send(method))
   end
 
-  specification = proc do
+  it 'creates a method with an arity of 0' do
     subject
-    if method != :some_state
-      file, line = object.new.send(method).first.split(':')[0, 2]
-      File.expand_path(file).should eql(File.expand_path('../../../../../lib/adamantium/module_methods.rb', __FILE__))
-      line.to_i.should eql(80)
-    end
-  end
-
-  it 'sets the file and line number properly' do
-    # Exclude example for methot that does not return caller
-    if method == :some_method
-      return
-    end
-
-    if RUBY_PLATFORM.include?('java')
-      pending('Kernel#caller returns the incorrect line number in JRuby', &specification)
-    else
-      instance_eval(&specification)
-    end
+    object.new.method(method).arity.should be_zero
   end
 
   context 'when the initializer calls the memoized method' do
@@ -60,6 +41,7 @@ end
 
 describe Adamantium::ModuleMethods, '#memoize' do
   subject { object.memoize(method, options) }
+
   let(:options) { {} }
 
   let(:object) do
@@ -67,6 +49,14 @@ describe Adamantium::ModuleMethods, '#memoize' do
       def some_state
         Object.new
       end
+    end
+  end
+
+  context 'on method with arguments' do
+    let(:method) { :argumented }
+
+    it 'should raise error' do
+      expect { subject }.to raise_error(ArgumentError, 'Cannot memoize method with nonzero arity')
     end
   end
 

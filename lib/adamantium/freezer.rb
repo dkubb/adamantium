@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Adamantium
 
   # Abstract base class for freezers
@@ -63,6 +65,7 @@ module Adamantium
       def self.freeze(value)
         value.freeze
       end
+
       public_class_method :call
     end
 
@@ -79,6 +82,7 @@ module Adamantium
       def self.freeze(value)
         IceNine.deep_freeze(value)
       end
+
       public_class_method :call
     end
 
@@ -100,18 +104,13 @@ module Adamantium
     # @api private
     def self.get(name)
       case name
-      when :noop
-        Noop
-      when :deep
-        Deep
-      when :flat
-        Flat
+      when :noop then Noop
+      when :deep then Deep
+      when :flat then Flat
       else
         raise UnknownFreezerError, "Freezer with name #{name.inspect} is unknown"
       end
     end
-
-    ALLOWED_KEYS = [:freezer].freeze
 
     # Parse freezer options
     #
@@ -127,15 +126,11 @@ module Adamantium
     # @api private
     #
     def self.parse(options)
-      overflow = options.keys - ALLOWED_KEYS
-
-      unless overflow.empty?
-        raise OptionError, "Unknown option key(s) for memoizer #{overflow.inspect}"
+      keys = options.keys - [:freezer]
+      unless keys.empty?
+        raise OptionError, "Unknown option key(s) for memoizer #{keys.inspect}"
       end
-
-      return unless options.key?(:freezer)
-
-      get(options.fetch(:freezer))
+      get(options.fetch(:freezer)) if options.key?(:freezer)
     end
   end
 end

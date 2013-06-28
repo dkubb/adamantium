@@ -1,9 +1,11 @@
 adamantium
 ==========
 
-[![Build Status](https://secure.travis-ci.org/dkubb/adamantium.png)](http://travis-ci.org/dkubb/adamantium)
+Create immutable objects
+
+[![Build Status](https://secure.travis-ci.org/dkubb/adamantium.png)](https://travis-ci.org/dkubb/adamantium)
 [![Dependency Status](https://gemnasium.com/dkubb/adamantium.png)](https://gemnasium.com/dkubb/adamantium)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/dkubb/adamantium)
+[![Code Climate](https://codeclimate.com/github/dkubb/adamantium.png)](https://codeclimate.com/github/dkubb/adamantium)
 
 This is a small standalone gem featuring a module ripped out from [veritas](https://github.com/dkubb/veritas).
 It allows to make objects immutable in an unobtrusive way.
@@ -147,27 +149,7 @@ Contributing
 * Run "rake ci". This must pass and not show any regressions in the metrics for the code to be merged.
 * Send me a pull request. Bonus points for topic branches.
 
-License
--------
+Copyright
+---------
 
-Copyright (c) 2009-2012 Dan Kubb
-Copyright (c) 2012 Markus Schirp
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Copyright &copy; 2012 Dan Kubb. See LICENSE for details.

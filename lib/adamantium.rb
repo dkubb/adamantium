@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'ice_nine'
 
 # Allows objects to be made immutable
@@ -30,7 +32,6 @@ module Adamantium
       super
       descendant.send(:include, Adamantium)
       descendant.extend(self)
-
       self
     end
   end
@@ -94,7 +95,6 @@ module Adamantium
     unless memory.key?(name)
       store_memory(name, freeze_object(value))
     end
-
     self
   end
 
@@ -157,6 +157,7 @@ private
   def store_memory(name, value)
     memory[name] = value
   end
+
 end # module Adamantium
 
 require 'adamantium/module_methods'

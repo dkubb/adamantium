@@ -13,9 +13,10 @@ Gem::Specification.new do |gem|
 
   gem.require_paths    = %w[lib]
   gem.files            = `git ls-files`.split($/)
-  gem.test_files       = `git ls-files spec/{unit,integration}`.split($/)
+  gem.test_files       = `git ls-files -- spec/{unit,integration}`.split($/)
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
 
-  gem.add_runtime_dependency('backports', '~> 2.6.4')
-  gem.add_runtime_dependency('ice_nine',  '~> 0.5.0')
+  gem.add_runtime_dependency('ice_nine', '~> 0.8.0')
+
+  gem.add_development_dependency('bundler', '~> 1.3', '>= 1.3.5')
 end

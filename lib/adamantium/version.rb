@@ -1,3 +1,8 @@
+# encoding: utf-8
+
 module Adamantium
-  VERSION = '0.0.3'.freeze
-end
+
+  # Unreleased gem version
+  VERSION = '0.0.8'.freeze
+
+end # module Adamantium
