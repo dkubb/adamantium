@@ -72,9 +72,7 @@ module Adamantium
     # @api public
     #
     def original_instance_method(name)
-      memoized_methods.fetch(name) do
-        raise ArgumentError, "No method #{name.inspect} was memoized"
-      end
+      memoized_methods.fetch(name)
     end
 
   private
@@ -107,7 +105,9 @@ module Adamantium
     # @api private
     #
     def memoized_methods
-      @memoized_methods ||= {}
+      @memoized_methods ||= Hash.new do |_, name|
+        raise ArgumentError, "No method #{name.inspect} was memoized"
+      end
     end
 
     # Define a memoized method that delegates to the original method
