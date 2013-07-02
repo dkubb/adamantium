@@ -72,7 +72,7 @@ module Adamantium
     # @api public
     #
     def original_instance_method(name)
-      memoized_methods.fetch(name)
+      memoized_methods[name]
     end
 
   private
