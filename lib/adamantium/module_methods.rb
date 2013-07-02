@@ -46,6 +46,37 @@ module Adamantium
       self
     end
 
+    # Return original instance method
+    #
+    # @example
+    #
+    #   class Foo
+    #     include Adamantium
+    #
+    #     def bar
+    #     end
+    #     memoize :bar
+    #
+    #   end
+    #
+    #   Foo.original_instance_method(:bar) #=> UnboundMethod, where source_location still points to original!
+    #
+    # @param [Symbol] name
+    #
+    # @return [UnboundMethod]
+    #   if method was memoized before
+    #
+    # @raise [ArgumentError]
+    #   otherwise
+    #
+    # @api public
+    #
+    def original_instance_method(name)
+      memoized_methods.fetch(name) do
+        raise ArgumentError, "No method #{name.inspect} was memoized"
+      end
+    end
+
   private
 
     # Memoize the named method
@@ -63,9 +94,20 @@ module Adamantium
       if method.arity.nonzero?
         raise ArgumentError, 'Cannot memoize method with nonzero arity'
       end
+      memoized_methods[method_name]=method
       visibility = method_visibility(method_name)
       define_memoize_method(method, freezer)
       send(visibility, method_name)
+    end
+
+    # Return original method registry
+    #
+    # @return [Hash<Symbol, UnboundMethod>]
+    #
+    # @api private
+    #
+    def memoized_methods
+      @memoized_methods ||= {}
     end
 
     # Define a memoized method that delegates to the original method
