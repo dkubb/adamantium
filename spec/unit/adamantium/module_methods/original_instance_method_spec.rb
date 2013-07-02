@@ -7,13 +7,13 @@ describe Adamantium::ModuleMethods, '#original_instance_method' do
 
       def foo; end
 
-      const_set(:ORIGINAL, instance_method(:foo))
+      const_set(:ORIGINAL, instance_method(:foo).source_location)
 
       memoize :foo
     end
   end
 
-  subject { object.original_instance_method(name) }
+  subject { object.original_instance_method(name).source_location }
 
   context 'if method with name was memoized' do
     let(:name) { :foo }
