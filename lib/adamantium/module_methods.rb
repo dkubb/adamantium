@@ -88,6 +88,10 @@ module Adamantium
           store_memory(method_name, frozen)
         end
       end
+
+      define_method("#{method_name}_original_source_location") do
+        method.source_location
+      end
     end
 
     # Return the method visibility of a method
