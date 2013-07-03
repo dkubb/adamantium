@@ -25,15 +25,15 @@ module Adamantium
     #
     # @param [Class,Module] descendant
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def self.included(descendant)
       super
       descendant.send(:include, Adamantium)
       descendant.extend(self)
-      self
     end
+    private_class_method :included
 
   end # Flat
 
