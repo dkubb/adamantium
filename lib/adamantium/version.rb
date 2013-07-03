@@ -2,7 +2,7 @@
 
 module Adamantium
 
-  # Unreleased gem version
-  VERSION = '0.0.8'.freeze
+  # Released gem version
+  VERSION = '0.0.9'.freeze
 
 end # module Adamantium
