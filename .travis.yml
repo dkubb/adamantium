@@ -1,20 +1,35 @@
 language: ruby
 before_install: gem install bundler
-bundler_args: --without yard guard metrics benchmarks
-script: "bundle exec rake spec"
+bundler_args: --without yard guard benchmarks
+script: "bundle exec rake ci"
 rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
   - ruby-head
-  - jruby-19mode
-  - jruby-head
   - rbx-19mode
-matrix:
-  allow_failures:
-    - rvm: ruby-head
 notifications:
-  irc: "irc.freenode.org#datamapper"
+  irc:
+    channels:
+      - irc.freenode.org#rom-rb
+    on_success: never
+    on_failure: change
   email:
-    - dan.kubb@gmail.com
-    - mbj@schirp-dso.com
+    recipients:
+      - dan.kubb@gmail.com
+      - mbj@schirp-dso.com
+    on_success: never
+    on_failure: change
+matrix:
+  include:
+    - rvm: jruby-19mode
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
+    - rvm: jruby-head
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
+  allow_failures:
+    # mutant fails
+    - rvm: 1.9.3
+    - rvm: 2.0.0
+    - rvm: rbx-19mode
+    # broken on travis
+    - rvm: ruby-head
