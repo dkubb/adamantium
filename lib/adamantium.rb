@@ -34,7 +34,8 @@ module Adamantium
       descendant.extend(self)
       self
     end
-  end
+
+  end # Flat
 
   # Hook called when module is included
   #
@@ -45,7 +46,7 @@ module Adamantium
   #
   # @api private
   def self.included(descendant)
-    descendant.extend ModuleMethods if descendant.kind_of?(Module)
+    descendant.extend ModuleMethods
     descendant.extend ClassMethods  if descendant.kind_of?(Class)
     self
   end

@@ -17,6 +17,7 @@ module Adamantium
       Adamantium.included(mod)
       self
     end
+    private :included
 
     # Return default deep freezer
     #
