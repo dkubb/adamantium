@@ -26,6 +26,8 @@ describe Adamantium, '#memoize' do
       subject
       object.send(method).should be_frozen
     end
+
+    it_should_behave_like 'a command method'
   end
 
   context 'when the value is not frozen' do
@@ -40,6 +42,8 @@ describe Adamantium, '#memoize' do
       subject
       object.send(method).should be_frozen
     end
+
+    it_should_behave_like 'a command method'
   end
 
   context 'when the method is already memoized' do
@@ -53,5 +57,7 @@ describe Adamantium, '#memoize' do
     it 'does not change the value' do
       expect { subject }.to_not change { object.send(method) }
     end
+
+    it_should_behave_like 'a command method'
   end
 end
