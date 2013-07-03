@@ -46,6 +46,35 @@ module Adamantium
       self
     end
 
+    # Test if an instance method is memoized
+    #
+    # @example
+    #   class Foo
+    #     include Adamantium
+    #
+    #     def bar
+    #     end
+    #     memoize :bar
+    #
+    #   end
+    #
+    #   Foo.memoized?(:bar) # true
+    #   Foo.memoized?(:baz) # false, does not care if method acutally exists
+    #
+    # @param [Symbol] name
+    #
+    # @return [true]
+    #   if method is memoized
+    #
+    # @return [false]
+    #   otherwise
+    #
+    # @api private
+    #
+    def memoized?(name)
+      memoized_methods.key?(name)
+    end
+
     # Return original instance method
     #
     # @example
