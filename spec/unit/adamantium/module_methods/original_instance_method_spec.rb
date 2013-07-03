@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Adamantium::ModuleMethods, '#original_instance_method' do
+  subject { object.original_instance_method(name).source_location }
+
   let(:object) do
     Class.new do
       include Adamantium
@@ -13,19 +15,20 @@ describe Adamantium::ModuleMethods, '#original_instance_method' do
     end
   end
 
-  subject { object.original_instance_method(name).source_location }
-
-  context 'if method with name was memoized' do
+  context 'when the method was memoized' do
     let(:name) { :foo }
+
     it 'returns the original method' do
       should eql(object::ORIGINAL)
     end
   end
 
-  context 'if method with name was NOT memoized' do
+  context 'when the method was not memoized' do
     let(:name) { :bar }
-    it 'returns the original method' do
-      expect { subject }.to raise_error(ArgumentError, 'No method :bar was memoized')
+
+    it 'raises an exception' do
+      expect { subject }.
+        to raise_error(ArgumentError, 'No method :bar was memoized')
     end
   end
 end

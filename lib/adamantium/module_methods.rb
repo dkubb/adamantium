@@ -92,7 +92,7 @@ module Adamantium
       if method.arity.nonzero?
         raise ArgumentError, 'Cannot memoize method with nonzero arity'
       end
-      memoized_methods[method_name]=method
+      memoized_methods[method_name] = method
       visibility = method_visibility(method_name)
       define_memoize_method(method, freezer)
       send(visibility, method_name)
