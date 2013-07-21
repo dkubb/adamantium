@@ -164,3 +164,4 @@ end # module Adamantium
 require 'adamantium/module_methods'
 require 'adamantium/class_methods'
 require 'adamantium/freezer'
+require 'adamantium/mutable'
