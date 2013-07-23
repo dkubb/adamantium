@@ -18,4 +18,3 @@ describe Adamantium::Mutable, '#freeze' do
     object.instance_variable_set(:@foo, :bar)
   end
 end
-
