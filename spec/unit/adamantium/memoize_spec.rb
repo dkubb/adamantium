@@ -19,12 +19,12 @@ describe Adamantium, '#memoize' do
 
     it 'sets the memoized value for the method to the value' do
       subject
-      object.send(method).should equal(value)
+      expect(object.send(method)).to be(value)
     end
 
     it 'creates a method that returns a frozen value' do
       subject
-      object.send(method).should be_frozen
+      expect(object.send(method)).to be_frozen
     end
 
     it_should_behave_like 'a command method'
@@ -35,12 +35,12 @@ describe Adamantium, '#memoize' do
 
     it 'sets the memoized value for the method to the value' do
       subject
-      object.send(method).should eql(value)
+      expect(object.send(method)).to eql(value)
     end
 
     it 'creates a method that returns a frozen value' do
       subject
-      object.send(method).should be_frozen
+      expect(object.send(method)).to be_frozen
     end
 
     it_should_behave_like 'a command method'

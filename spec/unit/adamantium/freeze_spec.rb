@@ -24,9 +24,9 @@ describe Adamantium, '#freeze' do
     end
 
     it 'sets a memoization instance variable' do
-      object.should_not be_instance_variable_defined(:@__memory)
+      expect(object).to_not be_instance_variable_defined(:@__memory)
       subject
-      object.instance_variable_get(:@__memory).should be_instance_of(Adamantium::Memory)
+      expect(object.instance_variable_get(:@__memory)).to be_instance_of(Adamantium::Memory)
     end
   end
 
@@ -44,7 +44,7 @@ describe Adamantium, '#freeze' do
     end
 
     it 'does not set an instance variable for memoization' do
-      object.instance_variable_get(:@__memory).should be_instance_of(Adamantium::Memory)
+      expect(object.instance_variable_get(:@__memory)).to be_instance_of(Adamantium::Memory)
       subject
     end
   end

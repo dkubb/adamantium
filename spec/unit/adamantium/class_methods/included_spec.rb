@@ -17,11 +17,11 @@ describe Adamantium, '.included' do
     it_should_behave_like 'a command method'
 
     it 'includes Adamantium::ModuleMethods' do
-      included_modules.should include(Adamantium::ModuleMethods)
+      expect(included_modules).to include(Adamantium::ModuleMethods)
     end
 
     it 'does not include Adamantium::ClassMethods' do
-      included_modules.should_not include(Adamantium::ClassMethods)
+      expect(included_modules).to_not include(Adamantium::ClassMethods)
     end
   end
 
@@ -29,8 +29,8 @@ describe Adamantium, '.included' do
     let(:target) { Class.new }
 
     it 'includes Adamantium::{Class,Module}Methods' do
-      included_modules.should include(Adamantium::ModuleMethods)
-      included_modules.should include(Adamantium::ClassMethods)
+      expect(included_modules).to include(Adamantium::ModuleMethods)
+      expect(included_modules).to include(Adamantium::ClassMethods)
     end
 
     it_should_behave_like 'a command method'

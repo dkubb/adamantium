@@ -50,7 +50,7 @@ describe Adamantium::Freezer::Flat, '.call' do
 
     it { should be_instance_of(String) }
 
-    it { should == value }
+    it { should eql(value) }
 
     it { should be_frozen }
   end
@@ -59,7 +59,7 @@ describe Adamantium::Freezer::Flat, '.call' do
     let(:value) { [String.new] }
 
     it 'does NOT freeze inner values' do
-      subject.first.should_not be_frozen
+      expect(subject.first).to_not be_frozen
     end
   end
 end

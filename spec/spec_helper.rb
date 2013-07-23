@@ -23,6 +23,6 @@ require 'adamantium'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expect_with|
-    expect_with.syntax = [:should, :expect]
+    expect_with.syntax = :expect
   end
 end

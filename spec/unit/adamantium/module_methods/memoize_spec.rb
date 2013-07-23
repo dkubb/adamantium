@@ -7,18 +7,18 @@ shared_examples_for 'memoizes method' do
   it 'memoizes the instance method' do
     subject
     instance = object.new
-    instance.send(method).should equal(instance.send(method))
+    expect(instance.send(method)).to be(instance.send(method))
   end
 
   it 'creates a method that returns a same value' do
     subject
     instance = object.new
-    instance.send(method).should be(instance.send(method))
+    expect(instance.send(method)).to be(instance.send(method))
   end
 
   it 'creates a method with an arity of 0' do
     subject
-    object.new.method(method).arity.should be_zero
+    expect(object.new.method(method).arity).to be_zero
   end
 
   context 'when the initializer calls the memoized method' do
@@ -34,7 +34,7 @@ shared_examples_for 'memoizes method' do
 
     it 'memoizes the methdod inside the initializer' do
       subject
-      object.new.memoized(method).should_not be_nil
+      expect(object.new.memoized(method)).to_not be_nil
     end
   end
 end
@@ -73,7 +73,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it 'creates a method that returns a non frozen value' do
       subject
-      object.new.send(method).should_not be_frozen
+      expect(object.new.send(method)).to_not be_frozen
     end
   end
 
@@ -85,7 +85,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it 'creates a method that returns a frozen value' do
       subject
-      object.new.send(method).should be_frozen
+      expect(object.new.send(method)).to be_frozen
     end
   end
 
@@ -101,7 +101,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it 'creates a method that returns a frozen value' do
       subject
-      object.new.send(method).should be_frozen
+      expect(object.new.send(method)).to be_frozen
     end
   end
 
@@ -117,7 +117,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it 'creates a method that returns a frozen value' do
       subject
-      object.new.send(method).should be_frozen
+      expect(object.new.send(method)).to be_frozen
     end
   end
 
@@ -133,7 +133,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it 'creates a method that returns a frozen value' do
       subject
-      object.new.send(method).should be_frozen
+      expect(object.new.send(method)).to be_frozen
     end
   end
 end

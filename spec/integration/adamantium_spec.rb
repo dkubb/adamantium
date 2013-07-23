@@ -38,12 +38,12 @@ describe Adamantium do
 
     it 'should deep freeze instance and attributes' do
       should be_frozen
-      subject.attribute.should be_frozen
+      expect(subject.attribute).to be_frozen
     end
 
     it 'should deep freeze memoized values' do
-      subject.memoized.should be_frozen
-      subject.memoized[0].should be_frozen
+      expect(subject.memoized).to be_frozen
+      expect(subject.memoized[0]).to be_frozen
     end
   end
 
@@ -54,12 +54,12 @@ describe Adamantium do
 
     it 'should freeze only instance' do
       should be_frozen
-      subject.attribute.should_not be_frozen
+      expect(subject.attribute).to_not be_frozen
     end
 
     it 'should flat freeze memoized values' do
-      subject.memoized.should be_frozen
-      subject.memoized[0].should_not be_frozen
+      expect(subject.memoized).to be_frozen
+      expect(subject.memoized[0]).to_not be_frozen
     end
   end
 end
