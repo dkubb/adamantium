@@ -15,8 +15,8 @@ describe Adamantium::Freezer, '.parse' do
   end
 
   context 'with :freezer key' do
-    let(:options) { { :freezer => name } }
-    let(:name)    { mock('Name')         }
+    let(:options) { { freezer: name } }
+    let(:name)    { mock('Name')      }
 
     it 'should get freezer' do
       described_class.should_receive(:get).with(name).and_return(freezer)
@@ -25,7 +25,7 @@ describe Adamantium::Freezer, '.parse' do
   end
 
   context 'with any other key' do
-    let(:options) { { :other => :key } }
+    let(:options) { { other: :key } }
 
     it 'should raise error' do
       expect { subject }.to raise_error(described_class::OptionError, 'Unknown option key(s) for memoizer [:other]')

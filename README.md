@@ -68,7 +68,7 @@ class Example
   def buffer
     StringIO.new
   end
-  memoize :buffer, :freezer => :noop
+  memoize :buffer, freezer: :noop
 
   # Memoized method with nondeeply frozen value
   # Example:
@@ -82,7 +82,7 @@ class Example
   def random2
     [SecureRandom.hex(6)]
   end
-  memoize :random2, :freezer => :flat
+  memoize :random2, freezer: :flat
 end
 
 class FlatExample

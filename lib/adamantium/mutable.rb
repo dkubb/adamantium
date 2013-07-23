@@ -5,7 +5,7 @@ module Adamantium
   # This behavior sometimes is needed when a mutable
   # object needs to be referenced in an inmutable object tree.
   #
-  # If you have to use `memoize :foo, :freezer => :noop` to often you might
+  # If you have to use `memoize :foo, freezer: :noop` to often you might
   # want to include this module into your class.
   #
   # Use wisely! A rule of thumb only a tiny fraction of your objects

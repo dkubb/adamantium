@@ -27,8 +27,8 @@ describe Adamantium::ModuleMethods, '#original_instance_method' do
     let(:name) { :bar }
 
     it 'raises an exception' do
-      expect { subject }.
-        to raise_error(ArgumentError, 'No method :bar was memoized')
+      expect { subject }
+        .to raise_error(ArgumentError, 'No method :bar was memoized')
     end
   end
 end
