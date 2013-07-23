@@ -5,8 +5,8 @@ require 'spec_helper'
 describe Adamantium::Freezer, '.parse' do
   subject { object.parse(options) }
 
-  let(:object)  { described_class }
-  let(:freezer) { mock('Freezer') }
+  let(:object)  { described_class   }
+  let(:freezer) { double('Freezer') }
 
   context 'with empty options' do
     let(:options) { {} }
@@ -16,7 +16,7 @@ describe Adamantium::Freezer, '.parse' do
 
   context 'with :freezer key' do
     let(:options) { { freezer: name } }
-    let(:name)    { mock('Name')      }
+    let(:name)    { double('Name')    }
 
     it 'should get freezer' do
       described_class.should_receive(:get).with(name).and_return(freezer)

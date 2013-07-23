@@ -7,7 +7,7 @@ describe Adamantium::Freezer::Flat, '.freeze' do
 
   let(:object) { described_class }
 
-  let(:value) { mock('Value') }
+  let(:value) { double('Value') }
 
   it 'should freeze value' do
     value.should_receive(:freeze).and_return(value)

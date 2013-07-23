@@ -29,7 +29,7 @@ shared_examples_for 'memoizes method' do
 
     it 'allows the memoized method to be called within the initializer' do
       subject
-      expect { object.new }.to_not raise_error(NoMethodError)
+      expect { object.new }.to_not raise_error
     end
 
     it 'memoizes the methdod inside the initializer' do

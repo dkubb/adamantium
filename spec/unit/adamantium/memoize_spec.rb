@@ -47,8 +47,8 @@ describe Adamantium, '#memoize' do
   end
 
   context 'when the method is already memoized' do
-    let(:value)    { stub }
-    let(:original) { nil  }
+    let(:value)    { double }
+    let(:original) { nil    }
 
     before do
       object.memoize(method, original)

@@ -6,8 +6,7 @@ describe Adamantium::Freezer::Deep, '.freeze' do
   subject { object.freeze(value) }
 
   let(:object) { described_class }
-
-  let(:value) { mock('Value') }
+  let(:value)  { double('Value') }
 
   it 'should deep freeze value' do
     IceNine.should_receive(:deep_freeze).with(value).and_return(value)
