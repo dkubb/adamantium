@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Adamantium::ModuleMethods, '#original_instance_method' do

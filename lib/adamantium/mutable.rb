@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Adamantium
 
   # Module fake frozen object
