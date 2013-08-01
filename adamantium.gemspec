@@ -10,11 +10,12 @@ Gem::Specification.new do |gem|
   gem.description = 'Immutable extensions to objects'
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/dkubb/adamantium'
+  gem.licenses    = 'MIT'
 
   gem.require_paths    = %w[lib]
-  gem.files            = `git ls-files`.split($/)
-  gem.test_files       = `git ls-files -- spec/{unit,integration}`.split($/)
-  gem.extra_rdoc_files = %w[LICENSE README.md TODO]
+  gem.files            = `git ls-files`.split("\n")
+  gem.test_files       = `git ls-files -- spec/{unit,integration}`.split("\n")
+  gem.extra_rdoc_files = %w[LICENSE README.md CONTRIBUTING.md TODO]
 
   gem.add_runtime_dependency('ice_nine', '~> 0.8.0')
 
