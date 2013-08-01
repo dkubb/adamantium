@@ -1,12 +1,13 @@
 # encoding: utf-8
 
 require 'ice_nine'
+require 'thread_safe'
 
 # Allows objects to be made immutable
 module Adamantium
 
   # Storage for memoized methods
-  Memory = Class.new(::Hash)
+  Memory = Class.new(ThreadSafe::Hash)
 
   # Defaults to less strict defaults
   module Flat

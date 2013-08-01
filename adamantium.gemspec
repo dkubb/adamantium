@@ -17,7 +17,8 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files -- spec/{unit,integration}`.split("\n")
   gem.extra_rdoc_files = %w[LICENSE README.md CONTRIBUTING.md TODO]
 
-  gem.add_runtime_dependency('ice_nine', '~> 0.8.0')
+  gem.add_runtime_dependency('ice_nine',    '~> 0.8.0')
+  gem.add_runtime_dependency('thread_safe', '~> 0.1.2')
 
   gem.add_development_dependency('bundler', '~> 1.3', '>= 1.3.5')
 end
