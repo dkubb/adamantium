@@ -1,7 +1,7 @@
 adamantium
 ==========
 
-Create immutable objects
+Create immutable objects with ease.
 
 [![Gem Version](https://badge.fury.io/rb/adamantium.png)][gem]
 [![Build Status](https://secure.travis-ci.org/dkubb/adamantium.png?branch=master)][travis]
@@ -16,7 +16,7 @@ Create immutable objects
 [coveralls]: https://coveralls.io/r/dkubb/adamantium
 
 This is a small standalone gem featuring a module ripped out from [axiom](https://github.com/dkubb/axiom).
-It allows to make objects immutable in an unobtrusive way.
+It allows you to make objects immutable in a simple, unobtrusive way.
 
 Examples
 --------
@@ -70,7 +70,7 @@ class Example
   end
   memoize :buffer, freezer: :noop
 
-  # Memoized method with nondeeply frozen value
+  # Memoized method with shallow frozen value
   # Example:
   #
   # object = Example.new
@@ -86,12 +86,12 @@ class Example
 end
 
 class FlatExample
-  # Inclusion of Adamantium::Flat defaults do non deep frozen behavior
-  # for memoizer and constructor
+  # Inclusion of Adamantium::Flat defaults to shallow frozen 
+  # behavior for memoizer and constructor
 
   include Adamantium::Flat
 
-  # Instace is frozen but attribute is not
+  # Instance is frozen but attribute is not
   # object = FlatExample.new
   # object.frozen?           # => true
   # object.attribute.frozen? # => false
@@ -100,7 +100,7 @@ class FlatExample
   end
   attr_reader :attribute
 
-  # Memoized method with flat frozen value (default)
+  # Memoized method with flat frozen value (default with Adamantium::Flat)
   # Example:
   #
   # object = Example.new
