@@ -4,7 +4,7 @@ require 'spec_helper'
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe Adamantium, '#memoize' do
-  subject { object.memoize(method, value) }
+  subject { object.memoize(method, [], value) }
 
   let(:described_class) { Class.new(AdamantiumSpecs::Object) }
   let(:object)          { described_class.new                }
@@ -51,7 +51,7 @@ describe Adamantium, '#memoize' do
     let(:original) { nil    }
 
     before do
-      object.memoize(method, original)
+      object.memoize(method, [], original)
     end
 
     it 'does not change the value' do

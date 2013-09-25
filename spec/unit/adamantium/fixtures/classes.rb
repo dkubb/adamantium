@@ -4,7 +4,8 @@ module AdamantiumSpecs
   class Object
     include Adamantium
 
-    def argumented(foo)
+    def argumented(foo, bar)
+      "#{foo}#{bar}"
     end
 
     def test

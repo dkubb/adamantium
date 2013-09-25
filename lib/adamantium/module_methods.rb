@@ -118,9 +118,6 @@ module Adamantium
     # @api private
     def memoize_method(method_name, freezer)
       method = instance_method(method_name)
-      if method.arity.nonzero?
-        raise ArgumentError, 'Cannot memoize method with nonzero arity'
-      end
       memoized_methods[method_name] = method
       visibility = method_visibility(method_name)
       define_memoize_method(method, freezer)
@@ -152,11 +149,12 @@ module Adamantium
     def define_memoize_method(method, freezer)
       method_name = method.name.to_sym
       undef_method(method_name)
-      define_method(method_name) do ||
-        memory.fetch(method_name) do
-          value  = method.bind(self).call
+      define_method(method_name) do |*args|
+        send_key = SendKey.new(method_name, args)
+        memory.fetch(send_key) do
+          value  = method.bind(self).call(*args)
           frozen = freezer.call(value)
-          store_memory(method_name, frozen)
+          store_memory(send_key, frozen)
         end
       end
     end

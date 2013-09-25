@@ -18,6 +18,11 @@ describe Adamantium do
         [Object.new]
       end
       memoize :memoized
+
+      def memoized_with_args(a, b)
+        [a, b]
+      end
+      memoize :memoized_with_args
     end
   end
 
@@ -44,6 +49,8 @@ describe Adamantium do
     it 'should deep freeze memoized values' do
       expect(subject.memoized).to be_frozen
       expect(subject.memoized[0]).to be_frozen
+      expect(subject.memoized_with_args('a', 'b')).to be_frozen
+      expect(subject.memoized_with_args('a', 'b')[0]).to be_frozen
     end
   end
 
@@ -60,6 +67,8 @@ describe Adamantium do
     it 'should flat freeze memoized values' do
       expect(subject.memoized).to be_frozen
       expect(subject.memoized[0]).to_not be_frozen
+      expect(subject.memoized_with_args('a', 'b')).to be_frozen
+      expect(subject.memoized_with_args('a', 'b')[0]).not_to be_frozen
     end
   end
 end
