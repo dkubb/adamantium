@@ -17,7 +17,7 @@ describe Adamantium, '#memoized' do
 
   context 'when a method is memoized' do
     before do
-      object.memoize(method, value)
+      object.memoize(method, [], value)
     end
 
     it { should equal(value) }

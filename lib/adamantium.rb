@@ -68,34 +68,39 @@ module Adamantium
   # Get the memoized value for a method
   #
   # @example
-  #   hash = object.memoized(:hash)
+  #   value = object.memoized(:method_name, 'a', 1)
   #
   # @param [Symbol] name
   #   the method name
+  # @param [Array] args
+  #   the method arguments
   #
   # @return [Object]
   #
   # @api public
-  def memoized(name)
-    memory[name]
+  def memoized(name, *args)
+    memory[SendKey.new(name, args)]
   end
 
   # Sets a memoized value for a method
   #
   # @example
-  #   object.memoize(:hash, 12345)
+  #   object.memoize(:hash, [], 12345)
   #
   # @param [Symbol] name
   #   the method name
+  # @param [Array] args
+  #   the method arguments
   # @param [Object] value
   #   the value to memoize
   #
   # @return [self]
   #
   # @api public
-  def memoize(name, value)
-    unless memory.key?(name)
-      store_memory(name, freeze_object(value))
+  def memoize(name, args, value)
+    send_key = SendKey.new(name, args)
+    unless memory.key?(send_key)
+      store_memory(send_key, freeze_object(value))
     end
     self
   end
@@ -146,8 +151,8 @@ private
 
   # Store the value in memory
   #
-  # @param [Symbol] name
-  #   the method name
+  # @param [SendKey] send_key
+  #   the key of the method send to memoize
   # @param [Object] value
   #   the value to memoize
   #
@@ -156,8 +161,8 @@ private
   # @return [value]
   #
   # @api private
-  def store_memory(name, value)
-    memory[name] = value
+  def store_memory(send_key, value)
+    memory[send_key] = value
   end
 
 end # module Adamantium
@@ -166,3 +171,4 @@ require 'adamantium/module_methods'
 require 'adamantium/class_methods'
 require 'adamantium/freezer'
 require 'adamantium/mutable'
+require 'adamantium/send_key'
