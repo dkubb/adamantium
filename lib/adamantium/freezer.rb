@@ -108,7 +108,7 @@ module Adamantium
       when :deep then Deep
       when :flat then Flat
       else
-        raise UnknownFreezerError, "Freezer with name #{name.inspect} is unknown"
+        fail UnknownFreezerError, "Freezer with name #{name.inspect} is unknown"
       end
     end
 
@@ -128,7 +128,7 @@ module Adamantium
     def self.parse(options)
       keys = options.keys - [:freezer]
       unless keys.empty?
-        raise OptionError, "Unknown option key(s) for memoizer #{keys.inspect}"
+        fail OptionError, "Unknown option key(s) for memoizer #{keys.inspect}"
       end
       get(options.fetch(:freezer)) if options.key?(:freezer)
     end

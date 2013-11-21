@@ -119,7 +119,7 @@ module Adamantium
     def memoize_method(method_name, freezer)
       method = instance_method(method_name)
       if method.arity.nonzero?
-        raise ArgumentError, 'Cannot memoize method with nonzero arity'
+        fail ArgumentError, 'Cannot memoize method with nonzero arity'
       end
       memoized_methods[method_name] = method
       visibility = method_visibility(method_name)
@@ -135,7 +135,7 @@ module Adamantium
     #
     def memoized_methods
       @memoized_methods ||= ThreadSafe::Hash.new do |_memoized_methods, name|
-        raise ArgumentError, "No method #{name.inspect} was memoized"
+        fail ArgumentError, "No method #{name.inspect} was memoized"
       end
     end
 
