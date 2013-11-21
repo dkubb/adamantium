@@ -5,19 +5,6 @@ module Adamantium
   # Methods mixed in to adamantium modules
   module ModuleMethods
 
-    # Hook called when module is included
-    #
-    # @param [Module] mod
-    #   the module including ModuleMethods
-    #
-    # @return [self]
-    #
-    # @api private
-    def included(mod)
-      Adamantium.included(mod)
-      self
-    end
-
     # Return default deep freezer
     #
     # @return [Freezer::Deep]
