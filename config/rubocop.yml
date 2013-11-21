@@ -55,3 +55,7 @@ ConstantName:
 # Not all trivial readers/writers can be defined with attr_* methods
 TrivialAccessors:
   Enabled: false
+
+# Allow empty lines around body
+EmptyLinesAroundBody:
+  Enabled: false
