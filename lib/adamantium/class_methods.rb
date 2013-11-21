@@ -17,5 +17,5 @@ module Adamantium
       freezer.freeze(super)
     end
 
-  end # module ClassMethods
-end # module Adamantium
+  end # ClassMethods
+end # Adamantium

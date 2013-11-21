@@ -176,5 +176,5 @@ module Adamantium
       end
     end
 
-  end # module ModuleMethods
-end # module Adamantium
+  end # ModuleMethods
+end # Adamantium

@@ -162,7 +162,7 @@ private
     memory[name] = value
   end
 
-end # module Adamantium
+end # Adamantium
 
 require 'adamantium/module_methods'
 require 'adamantium/class_methods'
