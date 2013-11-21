@@ -17,7 +17,6 @@ module Adamantium
     # @return [Freezer::Flat]
     #
     # @api private
-    #
     def freezer
       Freezer::Flat
     end
