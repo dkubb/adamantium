@@ -1,4 +1,37 @@
-/Gemfile.lock
-/coverage
-/tmp
-/.rbx
+## MAC OS
+.DS_Store
+
+## TEXTMATE
+*.tmproj
+tmtags
+
+## EMACS
+*~
+\#*
+.\#*
+
+## VIM
+*.sw[op]
+
+## Rubinius
+*.rbc
+.rbx
+
+## PROJECT::GENERAL
+*.gem
+coverage
+profiling
+turbulence
+rdoc
+pkg
+tmp
+doc
+log
+.yardoc
+measurements
+
+## BUNDLER
+.bundle
+Gemfile.lock
+
+## PROJECT::SPECIFIC
