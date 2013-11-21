@@ -10,7 +10,6 @@ module Adamantium
     # @return [Freezer::Deep]
     #
     # @api private
-    #
     def freezer
       Freezer::Deep
     end
@@ -57,7 +56,6 @@ module Adamantium
     #   otherwise
     #
     # @api private
-    #
     def memoized?(name)
       memoized_methods.key?(name)
     end
@@ -86,7 +84,6 @@ module Adamantium
     #   otherwise
     #
     # @api public
-    #
     def original_instance_method(name)
       memoized_methods[name]
     end
@@ -119,7 +116,6 @@ module Adamantium
     # @return [Hash<Symbol, UnboundMethod>]
     #
     # @api private
-    #
     def memoized_methods
       @memoized_methods ||= ThreadSafe::Hash.new do |_memoized_methods, name|
         fail ArgumentError, "No method #{name.inspect} was memoized"
