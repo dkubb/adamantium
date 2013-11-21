@@ -92,10 +92,10 @@ module Adamantium
 
     # Memoize the named method
     #
-    # @param [#to_s] method_name
+    # @param [Symbol] method_name
     #   a method name to memoize
     # @param [#call] freezer
-    #   a freezer for memoized values
+    #   a callable object to freeze the value
     #
     # @return [undefined]
     #
