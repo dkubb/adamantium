@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.description = 'Immutable extensions to objects'
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/dkubb/adamantium'
-  gem.licenses    = 'MIT'
+  gem.license     = 'MIT'
 
   gem.require_paths    = %w[lib]
   gem.files            = `git ls-files`.split("\n")
