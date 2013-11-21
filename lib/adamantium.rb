@@ -48,10 +48,13 @@ module Adamantium
   #
   # @api private
   def self.included(descendant)
-    descendant.extend ModuleMethods
-    descendant.extend ClassMethods  if descendant.kind_of?(Class)
+    descendant.class_eval do
+      extend ModuleMethods
+      extend ClassMethods if kind_of?(Class)
+    end
     self
   end
+  private_class_method :included
 
   # Freeze the object
   #
