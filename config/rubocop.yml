@@ -29,7 +29,7 @@ CollectionMethods:
 # sections of code and visually separate them. When the keyword is at the same
 # level I think it sort of blends in with the def keywords and makes it harder
 # to scan the code and see where the sections are.
-AccessControl:
+AccessModifierIndentation:
   Enabled: false
 
 # Limit line length
