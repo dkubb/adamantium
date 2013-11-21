@@ -32,62 +32,6 @@ module Adamantium
       self
     end
 
-    # Test if an instance method is memoized
-    #
-    # @example
-    #   class Foo
-    #     include Adamantium
-    #
-    #     def bar
-    #     end
-    #     memoize :bar
-    #
-    #   end
-    #
-    #   Foo.memoized?(:bar) # true
-    #   Foo.memoized?(:baz) # false, does not care if method acutally exists
-    #
-    # @param [Symbol] name
-    #
-    # @return [true]
-    #   if method is memoized
-    #
-    # @return [false]
-    #   otherwise
-    #
-    # @api private
-    def memoized?(name)
-      memoized_methods.key?(name)
-    end
-
-    # Return original instance method
-    #
-    # @example
-    #
-    #   class Foo
-    #     include Adamantium
-    #
-    #     def bar
-    #     end
-    #     memoize :bar
-    #
-    #   end
-    #
-    #   Foo.original_instance_method(:bar) #=> UnboundMethod, where source_location still points to original!
-    #
-    # @param [Symbol] name
-    #
-    # @return [UnboundMethod]
-    #   if method was memoized before
-    #
-    # @raise [ArgumentError]
-    #   otherwise
-    #
-    # @api public
-    def original_instance_method(name)
-      memoized_methods[name]
-    end
-
   private
 
     # Hook called when module is included
@@ -114,62 +58,8 @@ module Adamantium
     #
     # @api private
     def memoize_method(method_name, freezer)
-      method = instance_method(method_name)
-      if method.arity.nonzero?
-        fail ArgumentError, 'Cannot memoize method with nonzero arity'
-      end
-      memoized_methods[method_name] = method
-      visibility = method_visibility(method_name)
-      define_memoize_method(method, freezer)
-      send(visibility, method_name)
-    end
-
-    # Return original method registry
-    #
-    # @return [Hash<Symbol, UnboundMethod>]
-    #
-    # @api private
-    def memoized_methods
-      @memoized_methods ||= ThreadSafe::Hash.new do |_memoized_methods, name|
-        fail ArgumentError, "No method #{name.inspect} was memoized"
-      end
-    end
-
-    # Define a memoized method that delegates to the original method
-    #
-    # @param [UnboundMethod] method
-    #   the method to memoize
-    # @param [#call] freezer
-    #   a freezer for memoized values
-    #
-    # @return [undefined]
-    #
-    # @api private
-    def define_memoize_method(method, freezer)
-      method_name = method.name.to_sym
-      undef_method(method_name)
-      define_method(method_name) do ||
-        memory.fetch(method_name) do
-          value  = method.bind(self).call
-          frozen = freezer.call(value)
-          store_memory(method_name, frozen)
-        end
-      end
-    end
-
-    # Return the method visibility of a method
-    #
-    # @param [String, Symbol] method
-    #   the name of the method
-    #
-    # @return [Symbol]
-    #
-    # @api private
-    def method_visibility(method)
-      if    private_method_defined?(method)   then :private
-      elsif protected_method_defined?(method) then :protected
-      else                                         :public
-      end
+      memoized_methods[method_name] = MethodBuilder
+        .new(self, method_name, freezer).call
     end
 
   end # ModuleMethods

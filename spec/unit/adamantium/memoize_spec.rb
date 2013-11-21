@@ -4,7 +4,7 @@ require 'spec_helper'
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe Adamantium, '#memoize' do
-  subject { object.memoize(method, value) }
+  subject { object.memoize(method => value) }
 
   let(:described_class) { Class.new(AdamantiumSpecs::Object) }
   let(:object)          { described_class.new                }
@@ -51,13 +51,11 @@ describe Adamantium, '#memoize' do
     let(:original) { nil    }
 
     before do
-      object.memoize(method, original)
+      object.memoize(method => original)
     end
 
-    it 'does not change the value' do
-      expect { subject }.to_not change { object.send(method) }
+    it 'raises an exception' do
+      expect { subject }.to raise_error(ArgumentError)
     end
-
-    it_should_behave_like 'a command method'
   end
 end

@@ -22,12 +22,6 @@ describe Adamantium, '#freeze' do
         .from(false)
         .to(true)
     end
-
-    it 'sets a memoization instance variable' do
-      expect(object).to_not be_instance_variable_defined(:@__memory)
-      subject
-      expect(object.instance_variable_get(:@__memory)).to be_instance_of(Adamantium::Memory)
-    end
   end
 
   context 'with a frozen object' do
@@ -37,15 +31,6 @@ describe Adamantium, '#freeze' do
 
     it 'does not change the frozen state of the object' do
       expect { subject }.to_not change(object, :frozen?)
-    end
-
-    it 'does not change the memoization instance variable' do
-      expect { subject }.to_not change { object.instance_variable_get(:@__memory) }
-    end
-
-    it 'does not set an instance variable for memoization' do
-      expect(object.instance_variable_get(:@__memory)).to be_instance_of(Adamantium::Memory)
-      subject
     end
   end
 end
