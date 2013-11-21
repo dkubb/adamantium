@@ -31,8 +31,10 @@ module Adamantium
     # @api private
     def self.included(descendant)
       super
-      descendant.send(:include, Adamantium)
-      descendant.extend(self)
+      descendant.instance_exec(self) do |mod|
+        include Adamantium
+        extend mod
+      end
     end
     private_class_method :included
 
