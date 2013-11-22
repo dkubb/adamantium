@@ -45,6 +45,7 @@ module Adamantium
   #
   # @api private
   def self.included(descendant)
+    super
     descendant.class_eval do
       include Memoizable
       extend ModuleMethods
