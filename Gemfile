@@ -5,7 +5,8 @@ source 'https://rubygems.org'
 gemspec
 
 platforms :rbx do
-  gem 'rubysl-singleton', '~> 2.0.0'
+  gem 'rubysl-prettyprint', '~> 2.0.2'
+  gem 'rubysl-singleton',    '~> 2.0.0'
 end
 
 group :development, :test do
