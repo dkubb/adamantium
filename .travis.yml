@@ -6,7 +6,7 @@ rvm:
   - 1.9.3
   - 2.0.0
   - ruby-head
-  - rbx-19mode
+  - rbx
 matrix:
   include:
     - rvm: jruby-19mode
@@ -17,7 +17,7 @@ matrix:
     - rvm: 1.9.3       # mutant fails
     - rvm: 2.0.0       # mutant fails
     - rvm: ruby-head   # travis broken
-    - rvm: rbx-19mode  # mutant fails
+    - rvm: rbx         # mutant fails
 notifications:
   irc:
     channels:
