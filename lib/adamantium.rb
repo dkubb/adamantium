@@ -50,7 +50,6 @@ module Adamantium
       extend ModuleMethods
       extend ClassMethods if kind_of?(Class)
     end
-    self
   end
   private_class_method :included
 
