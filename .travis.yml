@@ -12,11 +12,6 @@ matrix:
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
-  allow_failures:
-    - rvm: 1.9.3       # mutant fails
-    - rvm: 2.0.0       # mutant fails
-    - rvm: ruby-head   # travis broken
-    - rvm: rbx         # mutant fails
 notifications:
   irc:
     channels:
