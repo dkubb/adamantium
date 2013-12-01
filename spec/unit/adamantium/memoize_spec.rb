@@ -14,33 +14,12 @@ describe Adamantium, '#memoize' do
     described_class.memoize(method)
   end
 
-  context 'when the value is frozen' do
-    let(:value) { String.new.freeze }
-
-    it 'sets the memoized value for the method to the value' do
-      subject
-      expect(object.send(method)).to be(value)
-    end
-
-    it 'creates a method that returns a frozen value' do
-      subject
-      expect(object.send(method)).to be_frozen
-    end
-
-    it_should_behave_like 'a command method'
-  end
-
-  context 'when the value is not frozen' do
+  context 'when the method is not memoized' do
     let(:value) { String.new }
 
     it 'sets the memoized value for the method to the value' do
       subject
-      expect(object.send(method)).to eql(value)
-    end
-
-    it 'creates a method that returns a frozen value' do
-      subject
-      expect(object.send(method)).to be_frozen
+      expect(object.send(method)).to be(value)
     end
 
     it_should_behave_like 'a command method'

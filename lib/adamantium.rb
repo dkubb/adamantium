@@ -68,7 +68,6 @@ module Adamantium
 
 end # Adamantium
 
-require 'adamantium/method_builder'
 require 'adamantium/module_methods'
 require 'adamantium/class_methods'
 require 'adamantium/freezer'

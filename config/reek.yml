@@ -41,7 +41,6 @@ LongYieldList:
 NestedIterators:
   enabled: true
   exclude:
-  - Adamantium::MethodBuilder#create_memoized_method
   - Adamantium::ModuleMethods#define_memoize_method
   max_allowed_nesting: 1
   ignore_iterators: []

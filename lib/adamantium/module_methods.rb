@@ -58,7 +58,7 @@ module Adamantium
     #
     # @api private
     def memoize_method(method_name, freezer)
-      memoized_methods[method_name] = MethodBuilder
+      memoized_methods[method_name] = Memoizable::MethodBuilder
         .new(self, method_name, freezer).call
     end
 
