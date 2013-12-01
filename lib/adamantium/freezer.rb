@@ -94,6 +94,12 @@ module Adamantium
     # Error raised when memoizer options contain unknown keys
     class OptionError < RuntimeError; end
 
+    @freezers = {
+      noop: Noop,
+      deep: Deep,
+      flat: Flat,
+    }.freeze
+
     # Return freezer for name
     #
     # @param [Symbol] name
@@ -103,11 +109,7 @@ module Adamantium
     #
     # @api private
     def self.get(name)
-      case name
-      when :noop then Noop
-      when :deep then Deep
-      when :flat then Flat
-      else
+      @freezers.fetch(name) do
         fail UnknownFreezerError, "Freezer with name #{name.inspect} is unknown"
       end
     end
