@@ -87,7 +87,7 @@ protected
     self.class.freezer.freeze(copy)
   end
 
-  # Transform the object if the boolean value is true, or return the object
+  # Transform the object with the provided block if the condition is false
   #
   # @param [Boolean] condition
   #
