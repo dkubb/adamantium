@@ -54,6 +54,14 @@ module Adamantium
   end
   private_class_method :included
 
+  # Alias to the original dup method
+  #
+  # @return [Object]
+  #
+  # @api private
+  alias_method :__adamantium_dup__, :dup
+  private :__adamantium_dup__
+
   # A noop #dup for immutable objects
   #
   # @example
@@ -64,6 +72,19 @@ module Adamantium
   # @api public
   def dup
     self
+  end
+
+protected
+
+  # Transform the object with the provided block
+  #
+  # @return [Object]
+  #
+  # @api public
+  def transform(&block)
+    copy = __adamantium_dup__
+    copy.instance_eval(&block)
+    self.class.freezer.freeze(copy)
   end
 
 end # Adamantium

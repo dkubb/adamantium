@@ -4,6 +4,8 @@ module AdamantiumSpecs
   class Object
     include Adamantium
 
+    public :transform, :transform_unless
+
     def argumented(foo)
     end
 
@@ -13,6 +15,10 @@ module AdamantiumSpecs
 
     def public_method
       caller
+    end
+
+    def eql?(other)
+      kind_of?(other.class)
     end
 
   protected
