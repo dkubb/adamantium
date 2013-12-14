@@ -10,7 +10,8 @@ ClassVariable:
   exclude: []
 ControlParameter:
   enabled: true
-  exclude: []
+  exclude:
+  - Adamantium#transform_unless
 DataClump:
   enabled: true
   exclude: []
