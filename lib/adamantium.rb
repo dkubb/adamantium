@@ -87,6 +87,17 @@ protected
     self.class.freezer.freeze(copy)
   end
 
+  # Transform the object if the boolean value is true, or return the object
+  #
+  # @param [Boolean] condition
+  #
+  # @return [Object]
+  #
+  # @api public
+  def transform_unless(condition, &block)
+    condition ? self : transform(&block)
+  end
+
 end # Adamantium
 
 require 'adamantium/module_methods'
