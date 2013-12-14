@@ -1,2 +1,1 @@
 * Update #hash to be memoized automatically
-* Refactor memoization to use memoizable

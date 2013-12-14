@@ -9,19 +9,17 @@ shared_examples_for 'memoizes method' do
     instance = object.new
     expect(instance.send(method)).to be(instance.send(method))
   end
+end
 
-  it 'creates a method that returns a same value' do
-    subject
-    instance = object.new
-    expect(instance.send(method)).to be(instance.send(method))
-  end
-
+shared_examples_for 'wraps original method' do
   it 'creates a method with an arity of 0' do
     subject
     expect(object.new.method(method).arity).to be_zero
   end
 
   context 'when the initializer calls the memoized method' do
+    it_should_behave_like 'memoizes method'
+
     before do
       method = self.method
       object.send(:define_method, :initialize) { send(method) }
@@ -30,11 +28,6 @@ shared_examples_for 'memoizes method' do
     it 'allows the memoized method to be called within the initializer' do
       subject
       expect { object.new }.to_not raise_error
-    end
-
-    it 'memoizes the methdod inside the initializer' do
-      subject
-      expect(object.new.memoized(method)).to_not be_nil
     end
   end
 end
@@ -56,7 +49,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
     let(:method) { :argumented }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError, 'Cannot memoize method with nonzero arity')
+      expect { subject }.to raise_error(ArgumentError, "Cannot memoize #{object}#argumented, its arity is 1")
     end
   end
 
@@ -65,7 +58,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
     let(:options) { { freezer: :noop } }
 
     it_should_behave_like 'a command method'
-    it_should_behave_like 'memoizes method'
+    it_should_behave_like 'wraps original method'
 
     it 'is still a public method' do
       should be_public_method_defined(method)
@@ -82,6 +75,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it_should_behave_like 'a command method'
     it_should_behave_like 'memoizes method'
+    it_should_behave_like 'wraps original method'
 
     it 'creates a method that returns a frozen value' do
       subject
@@ -94,6 +88,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
     it_should_behave_like 'a command method'
     it_should_behave_like 'memoizes method'
+    it_should_behave_like 'wraps original method'
 
     it 'is still a public method' do
       should be_public_method_defined(method)
