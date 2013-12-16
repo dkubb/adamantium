@@ -1,5 +1,4 @@
-adamantium
-==========
+# adamantium
 
 Create immutable objects with ease.
 
@@ -15,11 +14,10 @@ Create immutable objects with ease.
 [codeclimate]: https://codeclimate.com/github/dkubb/adamantium
 [coveralls]: https://coveralls.io/r/dkubb/adamantium
 
-This is a small standalone gem featuring a module ripped out from [axiom](https://github.com/dkubb/axiom).
+This is a small standalone gem featuring a module extracted from [axiom](https://github.com/dkubb/axiom).
 It allows you to make objects immutable in a simple, unobtrusive way.
 
-Examples
---------
+## Examples
 
 ``` ruby
 require 'adamantium'
@@ -135,18 +133,15 @@ class FlatExample
 end
 ```
 
-Credits
--------
+## Credits
 
 * Dan Kubb ([dkubb](https://github.com/dkubb))
 * Markus Schirp ([mbj](https://github.com/mbj))
 
-Contributing
-------------
+## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-Copyright
----------
+## Copyright
 
 Copyright &copy; 2012-2014 Dan Kubb. See LICENSE for details.
