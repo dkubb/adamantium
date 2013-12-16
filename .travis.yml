@@ -1,5 +1,4 @@
 language: ruby
-cache: bundler
 bundler_args: --without yard guard benchmarks
 script: "bundle exec rake ci:metrics"
 rvm:
@@ -13,7 +12,6 @@ matrix:
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
-  fast_finish: true
 notifications:
   irc:
     channels:
