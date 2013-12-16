@@ -86,7 +86,7 @@ class Example
 end
 
 class FlatExample
-  # Inclusion of Adamantium::Flat defaults to shallow frozen 
+  # Inclusion of Adamantium::Flat defaults to shallow frozen
   # behavior for memoizer and constructor
 
   include Adamantium::Flat
