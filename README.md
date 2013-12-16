@@ -133,6 +133,29 @@ class FlatExample
 end
 ```
 
+## Usage with equalizer
+
+Adamanitum may be used with [equalizer](https://www.github.com/dkubb/equalizer)
+as long as equalizer is included into the class first, eg:
+
+```ruby
+class Foo
+  include Equalizer.new(:foo)
+  include Adamantium
+end
+```
+
+Another, less common form is to include all the modules in a single line. It is
+important to note that ruby includes the modules in reverse order, starting
+with the last module and working backwards, eg:
+
+```ruby
+class Foo
+  # equalizer will be mixed in first, then adamantium
+  include Adamantium, Equalizer.new(:foo)
+end
+```
+
 ## Credits
 
 * Dan Kubb ([dkubb](https://github.com/dkubb))
