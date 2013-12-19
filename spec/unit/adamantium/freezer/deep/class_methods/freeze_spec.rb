@@ -9,7 +9,7 @@ describe Adamantium::Freezer::Deep, '.freeze' do
   let(:value)  { double('Value') }
 
   it 'should deep freeze value' do
-    IceNine.should_receive(:deep_freeze).with(value).and_return(value)
+    IceNine.should_receive(:deep_freeze!).with(value).and_return(value)
     should be(value)
   end
 end

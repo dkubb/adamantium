@@ -80,7 +80,7 @@ module Adamantium
       #
       # @api private
       def self.freeze(value)
-        IceNine.deep_freeze(value)
+        IceNine.deep_freeze!(value)
       end
 
       public_class_method :call
