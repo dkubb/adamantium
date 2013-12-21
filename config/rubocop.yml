@@ -1,10 +1,4 @@
-AllCops:
-  Includes:
-    - '**/*.rake'
-    - 'Gemfile'
-    - 'Gemfile.devtools'
-  Excludes:
-    - '**/vendor/**'
+inherit_from: ../.rubocop.yml
 
 # Avoid parameter lists longer than five parameters.
 ParameterLists:
