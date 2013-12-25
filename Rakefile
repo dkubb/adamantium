@@ -9,6 +9,13 @@ RSpec::Core::RakeTask.new(:spec)
 task :test    => :spec
 task :default => :spec
 
+require 'reek/rake/task'
+Reek::Rake::Task.new do |reek|
+  reek.reek_opts     = '--quiet'
+  reek.fail_on_error = true
+  reek.config_files  = '.reek.yml'
+end
+
 begin
   require 'rubocop/rake_task'
   Rubocop::RakeTask.new
@@ -29,4 +36,4 @@ Yardstick::Rake::Verify.new do |verify|
   verify.threshold = 98
 end
 
-task :ci => [:spec, :rubocop, :verify_measurements]
+task :ci => [:spec, :reek, :rubocop, :verify_measurements]
