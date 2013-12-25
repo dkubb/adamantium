@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.extra_rdoc_files = %w[LICENSE README.md CONTRIBUTING.md TODO]
 
   gem.add_runtime_dependency('ice_nine',   '~> 0.11.0')
-  gem.add_runtime_dependency('memoizable', '~> 0.3.0')
+  gem.add_runtime_dependency('memoizable', '~> 0.4.0')
 
   gem.add_development_dependency('bundler', '~> 1.3', '>= 1.3.5')
 end

@@ -18,8 +18,8 @@ describe Adamantium, '#transform' do
   end
 
   it 'yields the copy to the block' do
-    expect { |block| object.transform(&block) }
-      .to yield_with_args(described_class)
+    expect { |block| object.transform(&block) }.
+      to yield_with_args(described_class)
   end
 
   it 'evaluates the block within the context of the copy' do
@@ -29,7 +29,7 @@ describe Adamantium, '#transform' do
 
   it 'evaluates the block with an unfrozen copy' do
     frozen_in_block = nil
-    expect { object.transform { frozen_in_block = frozen? } }
-      .to change { frozen_in_block }.from(nil).to(false)
+    expect { object.transform { frozen_in_block = frozen? } }.
+      to change { frozen_in_block }.from(nil).to(false)
   end
 end

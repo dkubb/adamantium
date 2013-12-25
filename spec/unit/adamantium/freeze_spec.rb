@@ -18,9 +18,9 @@ describe Adamantium, '#freeze' do
     it_should_behave_like 'a command method'
 
     it 'freezes the object' do
-      expect { subject }.to change(object, :frozen?)
-        .from(false)
-        .to(true)
+      expect { subject }.to change(object, :frozen?).
+        from(false).
+        to(true)
     end
   end
 

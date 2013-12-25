@@ -11,8 +11,8 @@ describe Adamantium, '#transform_unless' do
     let(:condition) { true }
 
     it 'does not evaluate the block' do
-      expect { |block| object.transform_unless(condition, &block) }
-        .not_to yield_control
+      expect { |block| object.transform_unless(condition, &block) }.
+        not_to yield_control
     end
 
     it 'returns the object' do
@@ -24,8 +24,8 @@ describe Adamantium, '#transform_unless' do
     let(:condition) { false }
 
     it 'evaluates the block' do
-      expect { |block| object.transform_unless(condition, &block) }
-        .to yield_control
+      expect { |block| object.transform_unless(condition, &block) }.
+        to yield_control
     end
 
     it 'returns a copy of the object' do
