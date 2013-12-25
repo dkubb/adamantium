@@ -4,3 +4,15 @@ AllCops:
   Excludes:
     - 'Gemfile.devtools'
     - 'vendor/**'
+
+# Enforce Ruby 1.8-compatible hash syntax
+HashSyntax:
+  EnforcedStyle: hash_rockets
+
+# Allow dots at the end of lines
+DotPosition:
+  Enabled: false
+
+# Don't use the new lambda literal syntax
+Lambda:
+  Enabled: false

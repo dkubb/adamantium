@@ -55,7 +55,7 @@ describe Adamantium::ModuleMethods, '#memoize' do
 
   context 'with :noop freezer option' do
     let(:method)  { :some_state        }
-    let(:options) { { freezer: :noop } }
+    let(:options) { { :freezer => :noop } }
 
     it_should_behave_like 'a command method'
     it_should_behave_like 'wraps original method'

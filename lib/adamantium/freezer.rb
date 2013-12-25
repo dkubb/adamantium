@@ -86,7 +86,7 @@ module Adamantium
       public_class_method :call
     end
 
-    Noop = ->(object) { object }.freeze
+    Noop = lambda { |object| object }.freeze
 
     # Error raised when freezer cannot be found
     class UnknownFreezerError < RuntimeError; end
@@ -95,9 +95,9 @@ module Adamantium
     class OptionError < RuntimeError; end
 
     @freezers = {
-      noop: Noop,
-      deep: Deep,
-      flat: Flat,
+      :noop => Noop,
+      :deep => Deep,
+      :flat => Flat,
     }.freeze
 
     # Return freezer for name
