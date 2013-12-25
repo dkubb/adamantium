@@ -1,5 +1,11 @@
 # encoding: utf-8
 
-require 'devtools'
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
-Devtools.init_rake_tasks
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+
+task :test    => :spec
+
+task :default => :spec

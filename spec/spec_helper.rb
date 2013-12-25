@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'devtools/spec_helper'
-
 if ENV['COVERAGE'] == 'true'
   require 'simplecov'
   require 'coveralls'
@@ -23,6 +21,11 @@ if ENV['COVERAGE'] == 'true'
 end
 
 require 'adamantium'
+
+# Require spec support files and shared behavior
+Dir[File.expand_path('../{support,shared}/**/*.rb', __FILE__)].each do |file|
+  require file.chomp('.rb')
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expect_with|

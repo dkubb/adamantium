@@ -7,8 +7,15 @@ gemspec
 gem 'ice_nine',   :git => 'https://github.com/dkubb/ice_nine.git'
 gem 'memoizable', :git => 'https://github.com/dkubb/memoizable.git'
 
-group :development, :test do
-  gem 'devtools', :git => 'https://github.com/rom-rb/devtools.git'
+gem 'rake'
+
+group :test do
+  gem 'coveralls', :require => false
+  gem 'rspec',     '~> 2.14'
+  gem 'simplecov', :require => false
 end
 
-eval_gemfile 'Gemfile.devtools'
+platforms :rbx do
+  gem 'rubinius-coverage',  '~> 2.0'
+  gem 'rubysl', '~> 2.0'
+end
