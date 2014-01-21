@@ -1,5 +1,4 @@
 language: ruby
-cache: bundler
 bundler_args: --without yard guard benchmarks
 script: "bundle exec rake ci:metrics"
 rvm:
@@ -14,10 +13,12 @@ matrix:
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
     - rvm: jruby-20mode
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
+    - rvm: jruby-21mode
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
   allow_failures:
-    - rvm: 2.1.0
+    - rvm: 2.1.0  # buggy runtime
   fast_finish: true
 notifications:
   irc:
