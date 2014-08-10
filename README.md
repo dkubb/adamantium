@@ -83,6 +83,22 @@ class Example
     [SecureRandom.hex(6)]
   end
   memoize :random2, freezer: :flat
+
+  # Transform method derives changed instances without
+  # calling the constructor
+  # Example:
+  #
+  # object = Example.new
+  # object.random => ["abcdef"]
+  # update = object.edit "baz quux"
+  # update.random => ["abcdef"]
+  # update.attribute => "baz quux"
+  #
+  def edit attribute
+    transform do
+      @attribute = attribute
+    end
+  end
 end
 
 class FlatExample
