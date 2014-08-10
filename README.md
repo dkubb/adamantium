@@ -108,9 +108,12 @@ class FlatExample
   include Adamantium::Flat
 
   # Instance is frozen but attribute is not
+  # Example:
+  #
   # object = FlatExample.new
   # object.frozen?           # => true
   # object.attribute.frozen? # => false
+  #
   def initialize
     @attribute = "foo bar"
   end
