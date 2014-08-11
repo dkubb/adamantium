@@ -16,6 +16,8 @@ matrix:
       env: JRUBY_OPTS="$JRUBY_OPTS --debug --2.0"  # for simplecov
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug --2.0"  # for simplecov
+  allow_failures:
+    - rvm: jruby-head
   fast_finish: true
 notifications:
   irc:
