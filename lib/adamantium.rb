@@ -40,7 +40,7 @@ module Adamantium
   # @param [Module] descendant
   #   the module or class including Adamantium
   #
-  # @return [self]
+  # @return [undefined]
   #
   # @api private
   def self.included(descendant)

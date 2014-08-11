@@ -39,7 +39,7 @@ module Adamantium
     # @param [Module] descendant
     #   the module including ModuleMethods
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def included(descendant)
