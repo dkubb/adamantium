@@ -28,11 +28,11 @@ describe Adamantium::ModuleMethods, '#included' do
     # This is the most succinct approach I could think of to test whether the
     # superclass#included method is called. All of the built-in rspec helpers
     # did not seem to work for this.
-    included = false
-    superclass.class_eval { define_method(:included) { |_| included = true } }
-    expect(included).to be(false)
+    included = 0
+    superclass.class_eval { define_method(:included) { |_| included += 1 } }
+    expect(included).to be(0)
     subject
-    expect(included).to be(true)
+    expect(included).to be(1)
   end
 
   it 'includes Adamantium into the descendant' do

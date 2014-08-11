@@ -45,11 +45,10 @@ module Adamantium
   #
   # @api private
   def self.included(descendant)
-    super
     descendant.class_eval do
       include Memoizable
       extend ModuleMethods
-      extend ClassMethods if kind_of?(Class)
+      extend ClassMethods if instance_of?(Class)
     end
   end
   private_class_method :included
