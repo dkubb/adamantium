@@ -83,6 +83,22 @@ class Example
     [SecureRandom.hex(6)]
   end
   memoize :random2, freezer: :flat
+
+  # Transform method derives changed instances without
+  # calling the constructor
+  # Example:
+  #
+  # object = Example.new
+  # object.random => ["abcdef"]
+  # update = object.edit "baz quux"
+  # update.random => ["abcdef"]
+  # update.attribute => "baz quux"
+  #
+  def edit attribute
+    transform do
+      @attribute = attribute
+    end
+  end
 end
 
 class FlatExample
@@ -92,9 +108,12 @@ class FlatExample
   include Adamantium::Flat
 
   # Instance is frozen but attribute is not
+  # Example:
+  #
   # object = FlatExample.new
   # object.frozen?           # => true
   # object.attribute.frozen? # => false
+  #
   def initialize
     @attribute = "foo bar"
   end
