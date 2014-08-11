@@ -94,7 +94,7 @@ class Example
   # update.random => ["abcdef"]
   # update.attribute => "baz quux"
   #
-  def edit attribute
+  def edit(attribute)
     transform do
       @attribute = attribute
     end
