@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Adamantium::ClassMethods, '#freezer' do
+describe Adamantium::Flat, '#freezer' do
   let(:object) do
     Class.new do
       include Adamantium::Flat

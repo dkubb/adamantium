@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Adamantium, '#included' do
+describe Adamantium, '.included' do
   subject { descendant.instance_exec(object) { |mod| include mod } }
 
   let(:object)     { described_class }
