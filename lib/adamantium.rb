@@ -47,10 +47,7 @@ module Adamantium
     descendant.class_eval do
       include Memoizable
       extend ModuleMethods
-      if instance_of?(Class)
-        extend ClassMethods
-        memoize(:hash, :inspect, :to_s)
-      end
+      extend ClassMethods if instance_of?(Class)
     end
   end
   private_class_method :included

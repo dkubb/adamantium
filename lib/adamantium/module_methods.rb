@@ -4,6 +4,8 @@ module Adamantium
 
   # Methods mixed in to adamantium modules
   module ModuleMethods
+    MEMOIZE_METHODS = [:hash, :inspect, :to_s].freeze
+    RECURSION_GUARD = IceNine::RecursionGuard::ObjectSet.new
 
     # Return default deep freezer
     #
@@ -45,6 +47,19 @@ module Adamantium
     def included(descendant)
       super
       descendant.module_eval { include Adamantium }
+    end
+
+    # Hook called when method is added
+    #
+    # @param [Symbol] method_name
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def method_added(method_name)
+      RECURSION_GUARD.guard(self) do
+        memoize(method_name) if MEMOIZE_METHODS.include?(method_name)
+      end
     end
 
     # Memoize the named method
