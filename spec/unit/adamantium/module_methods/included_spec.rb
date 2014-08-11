@@ -11,7 +11,7 @@ describe Adamantium::ModuleMethods, '#included' do
 
   before do
     # Prevent Module.included from being called through inheritance
-    Adamantium.stub(:included)
+    allow(Adamantium).to receive(:included)
   end
 
   around do |example|
@@ -30,7 +30,9 @@ describe Adamantium::ModuleMethods, '#included' do
     # did not seem to work for this.
     included = false
     superclass.class_eval { define_method(:included) { |_| included = true } }
-    expect { subject }.to change { included }.from(false).to(true)
+    expect(included).to be(false)
+    subject
+    expect(included).to be(true)
   end
 
   it 'includes Adamantium into the descendant' do
