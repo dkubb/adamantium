@@ -97,7 +97,7 @@ module Adamantium
     @freezers = {
       noop: Noop,
       deep: Deep,
-      flat: Flat,
+      flat: Flat
     }.freeze
 
     # Return freezer for name

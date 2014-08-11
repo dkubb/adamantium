@@ -6,7 +6,7 @@ module AdamantiumSpecs
 
     public :transform, :transform_unless
 
-    def argumented(foo)
+    def argumented(_foo)
     end
 
     def test

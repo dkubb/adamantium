@@ -28,10 +28,17 @@ AccessModifierIndentation:
 
 # Limit line length
 LineLength:
-  Max: 116  # TODO: lower to 79
+  Max: 79
+  Exclude:
+    - lib/adamantium/freezer.rb
+    - spec/**/*_spec.rb
 
 # Disable documentation checking until a class needs to be documented once
 Documentation:
+  Enabled: false
+
+# Do not always use &&/|| instead of and/or.
+AndOr:
   Enabled: false
 
 # Do not favor modifier if/unless usage when you have a single-line body
@@ -52,4 +59,42 @@ TrivialAccessors:
 
 # Allow empty lines around body
 EmptyLinesAroundBody:
+  Enabled: false
+
+# Prefer String#% over Kernel#sprintf
+FormatString:
+  Enabled: false
+
+# Use square brackets for literal Array objects
+PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%':  ()
+    '%i': '[]'
+    '%q': ()
+    '%Q': ()
+    '%r': '{}'
+    '%s': ()
+    '%w': '[]'
+    '%W': '[]'
+    '%x': ()
+
+# Align if/else blocks with the variable assignment
+EndAlignment:
+  AlignWith: variable
+
+# Do not always align parameters when it is easier to read
+AlignParameters:
+  Exclude:
+    - spec/**/*_spec.rb
+
+# Do not prefer %i[...] for an array of symbols
+SymbolArray:
+  Enabled: false
+
+# Prefer #kind_of? over #is_a?
+ClassCheck:
+  EnforcedStyle: kind_of?
+
+# Do not prefer double quotes to be used when %q or %Q is more appropriate
+UnneededPercentQ:
   Enabled: false
