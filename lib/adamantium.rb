@@ -26,7 +26,6 @@ module Adamantium
     #
     # @api private
     def self.included(descendant)
-      super
       descendant.instance_exec(self) do |mod|
         include Adamantium
         extend mod
