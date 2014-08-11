@@ -64,6 +64,7 @@ TooManyStatements:
   enabled: true
   exclude:
   - Adamantium::ModuleMethods#define_memoize_method
+  - Adamantium::ModuleMethods#memoize
   - Adamantium::ModuleMethods#memoize_method
   - each
   max_statements: 5
